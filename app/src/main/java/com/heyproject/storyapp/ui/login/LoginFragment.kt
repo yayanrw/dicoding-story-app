@@ -18,7 +18,7 @@ class LoginFragment : Fragment() {
 
     private var binding: FragmentLoginBinding? = null
     private val viewModel: LoginViewModel by viewModels()
-    private lateinit var user: User
+    private lateinit var userPreference: UserPreference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,24 +37,22 @@ class LoginFragment : Fragment() {
             loginFragment = this@LoginFragment
         }
 
+        userPreference = UserPreference(requireContext())
+        isLoggedIn()
+
         viewModel.message.observe(viewLifecycleOwner) {
             Snackbar.make(view, it!!, Snackbar.LENGTH_SHORT).show()
         }
 
-        viewModel.requestState.observe(viewLifecycleOwner) {
-            if (it == RequestState.SUCCESS) {
-                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-            }
-        }
-
         viewModel.loginResult.observe(viewLifecycleOwner) {
-            val userPreference = UserPreference(requireContext())
-
-            user.userId = it.userId
-            user.name = it.name
-            user.token = it.token
-
+            val user = User()
+            user.apply {
+                userId = it.userId
+                name = it.name
+                token = it.token
+            }
             userPreference.setUser(user)
+            isLoggedIn()
         }
     }
 
@@ -72,5 +70,12 @@ class LoginFragment : Fragment() {
             binding!!.edLoginEmail.text.toString(),
             binding!!.edLoginPassword.text.toString()
         )
+    }
+
+    private fun isLoggedIn() {
+        val user: User = userPreference.getUser()
+        if (!user.token.isNullOrEmpty()) {
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        }
     }
 }
