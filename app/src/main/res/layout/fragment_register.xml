@@ -69,7 +69,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.heyproject.storyapp.util.PasswordEditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_password"
                 style="@style/Widget.StoryApp.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="8dp"
@@ -79,12 +79,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/register_email"
                 app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.heyproject.storyapp.util.PasswordEditText
                     android:id="@+id/ed_login_password"
                     style="@style/TextInputEditText"
                     android:inputType="textPassword" />
 
-            </com.heyproject.storyapp.util.PasswordEditText>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_sign_in"

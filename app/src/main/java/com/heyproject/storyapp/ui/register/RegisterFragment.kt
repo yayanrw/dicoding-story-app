@@ -33,6 +33,13 @@ class RegisterFragment : Fragment() {
     }
 
     fun register() {
-        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        with(viewModel) {
+            register(
+                binding?.edRegisterName.toString(),
+                binding?.edLoginEmail.toString(),
+                binding?.edLoginPassword.toString()
+            )
+        }
+//        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
     }
 }
