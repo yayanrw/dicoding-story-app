@@ -11,4 +11,5 @@
     <string name="login">Login</string>
     <string name="minlength">Password must be at least 6 characters</string>
     <string name="required">This field is Required</string>
+    <string name="not_valid_email">This is not a valid email</string>
 </resources>

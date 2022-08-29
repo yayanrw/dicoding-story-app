@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.heyproject.storyapp.network.StoryApi
 import com.heyproject.storyapp.util.RequestState
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
 
 const val TAG = "RegisterViewModel"
 
@@ -15,8 +17,8 @@ class RegisterViewModel : ViewModel() {
     private val _requestState = MutableLiveData<RequestState>()
     val requestState: LiveData<RequestState> = _requestState
 
-    private val _message = MutableLiveData<String>()
-    val message: LiveData<String> = _message
+    private val _message = MutableLiveData<String?>()
+    val message: LiveData<String?> = _message
 
     fun register(name: String, email: String, password: String) {
         viewModelScope.launch {
@@ -28,11 +30,20 @@ class RegisterViewModel : ViewModel() {
                         email,
                         password
                     )
-                _requestState.value = RequestState.SUCCESS
-                Log.d(TAG, response.toString())
-            } catch (e: Exception) {
+                if (!response.error!!) {
+                    _requestState.value = RequestState.SUCCESS
+                    _message.value = "Success, ${response.message}"
+                } else {
+                    _requestState.value = RequestState.ERROR
+                    _message.value = response.message
+                }
+            } catch (e: HttpException) {
                 _requestState.value = RequestState.ERROR
-                _message.value = e.toString()
+                _message.value = "Oops, something went wrong!"
+                Log.e(TAG, e.toString())
+            } catch (e: IOException) {
+                _requestState.value = RequestState.ERROR
+                _message.value = "Couldn't reach server, check your internet connection."
                 Log.e(TAG, e.toString())
             }
         }
