@@ -23,15 +23,13 @@ class RegisterViewModel : ViewModel() {
             try {
                 _requestState.value = RequestState.LOADING
                 val response =
-                    StoryApi.retrofitService.register(
+                    StoryApi.retrofitService.postRegister(
                         name,
                         email,
                         password
                     )
                 _requestState.value = RequestState.SUCCESS
                 Log.d(TAG, response.toString())
-
-
             } catch (e: Exception) {
                 _requestState.value = RequestState.ERROR
                 _message.value = e.toString()
