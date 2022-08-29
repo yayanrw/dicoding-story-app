@@ -32,7 +32,7 @@ class RegisterViewModel : ViewModel() {
                     )
                 if (!response.error!!) {
                     _requestState.value = RequestState.SUCCESS
-                    _message.value = "Success, ${response.message}"
+                    _message.value = "Success, ${response.message}. Please login to continue."
                 } else {
                     _requestState.value = RequestState.ERROR
                     _message.value = response.message

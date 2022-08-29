@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
 import com.heyproject.storyapp.databinding.FragmentRegisterBinding
+import com.heyproject.storyapp.util.RequestState
 
 class RegisterFragment : Fragment() {
     private var binding: FragmentRegisterBinding? = null
@@ -33,7 +35,13 @@ class RegisterFragment : Fragment() {
         }
 
         viewModel.message.observe(viewLifecycleOwner) {
-            Snackbar.make(view, it.toString(), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(view, it!!, Snackbar.LENGTH_SHORT).show()
+        }
+
+        viewModel.requestState.observe(viewLifecycleOwner) {
+            if (it == RequestState.SUCCESS) {
+                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            }
         }
     }
 
