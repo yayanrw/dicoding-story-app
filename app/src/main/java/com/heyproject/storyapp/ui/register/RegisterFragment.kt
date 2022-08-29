@@ -1,11 +1,13 @@
 package com.heyproject.storyapp.ui.register
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
 import com.heyproject.storyapp.databinding.FragmentRegisterBinding
 
@@ -29,6 +31,10 @@ class RegisterFragment : Fragment() {
             viewModel = viewModel
             registerFragment = this@RegisterFragment
         }
+
+        viewModel.message.observe(viewLifecycleOwner) {
+            Snackbar.make(view, it.toString(), Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     fun register() {
@@ -41,7 +47,6 @@ class RegisterFragment : Fragment() {
                 )
             }
         }
-//        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
     }
 
     private fun formValidation(): Boolean {
@@ -57,7 +62,12 @@ class RegisterFragment : Fragment() {
             binding?.registerEmail?.error = getString(R.string.required)
             isValid = false
         } else {
-            binding?.registerEmail?.error = null
+            if (!Patterns.EMAIL_ADDRESS.matcher(binding?.edLoginEmail?.text.toString()).matches()) {
+                binding?.registerEmail?.error = getString(R.string.not_valid_email)
+                isValid = false
+            } else {
+                binding?.registerEmail?.error = null
+            }
         }
 
         if (binding?.edLoginPassword?.text.isNullOrEmpty()) {
