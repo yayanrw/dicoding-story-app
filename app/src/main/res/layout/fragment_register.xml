@@ -69,7 +69,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <com.heyproject.storyapp.util.PasswordEditText
                 android:id="@+id/register_password"
                 style="@style/Widget.StoryApp.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="8dp"
@@ -84,7 +84,7 @@
                     style="@style/TextInputEditText"
                     android:inputType="textPassword" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            </com.heyproject.storyapp.util.PasswordEditText>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_sign_in"

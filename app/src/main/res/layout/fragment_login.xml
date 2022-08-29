@@ -62,7 +62,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/register_email"
                 app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.heyproject.storyapp.util.PasswordEditText
                     android:id="@+id/ed_login_password"
                     style="@style/TextInputEditText"
                     android:inputType="textPassword" />
