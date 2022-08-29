@@ -43,6 +43,10 @@ class LoginFragment : Fragment() {
     }
 
     fun signIn() {
-        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        viewModel.signIn(
+            binding!!.edLoginEmail.text.toString(),
+            binding!!.edLoginPassword.text.toString()
+        )
+//        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
     }
 }
