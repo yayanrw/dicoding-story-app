@@ -9,7 +9,7 @@ import retrofit2.http.POST
 interface StoryService {
     @FormUrlEncoded
     @POST("register")
-    suspend fun register(
+    suspend fun postRegister(
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String
@@ -17,7 +17,7 @@ interface StoryService {
 
     @FormUrlEncoded
     @POST("login")
-    suspend fun login(
+    suspend fun postLogin(
         @Field("email") email: String,
         @Field("password") password: String
     ): LoginResponse
