@@ -74,6 +74,7 @@
                 style="@style/Widget.StoryApp.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="8dp"
                 android:hint="@string/password"
+                app:passwordToggleEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_email"
