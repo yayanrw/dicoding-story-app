@@ -28,7 +28,6 @@
             <TextView
                 android:id="@+id/tv_app_name"
                 style="@style/Widget.StoryApp.TextView.BigTitle"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="108dp"
                 android:text="@string/register"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -39,9 +38,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_name"
                 style="@style/Widget.StoryApp.TextInputLayout.OutlinedBox"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="64dp"
-                android:layout_marginEnd="16dp"
                 android:hint="@string/name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,9 +55,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_email"
                 style="@style/Widget.StoryApp.TextInputLayout.OutlinedBox"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
                 android:hint="@string/email"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -77,9 +72,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_password"
                 style="@style/Widget.StoryApp.TextInputLayout.OutlinedBox"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
                 android:hint="@string/password"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -97,14 +90,12 @@
                 android:id="@+id/btn_sign_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="16dp"
+                android:onClick="@{() -> registerFragment.register()}"
                 android:text="@string/register_now"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_password"
-                android:onClick="@{() -> registerFragment.register()}"/>
+                app:layout_constraintTop_toBottomOf="@+id/register_password" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
