@@ -42,7 +42,7 @@ class LoginFragment : Fragment() {
         findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
     }
 
-    fun goToHomeScreen() {
+    fun signIn() {
         findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
     }
 }
