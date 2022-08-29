@@ -35,7 +35,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/register_email"
+                android:id="@+id/login_email"
                 style="@style/Widget.StoryApp.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="64dp"
                 android:hint="@string/email"
@@ -52,14 +52,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/register_password"
+                android:id="@+id/login_password"
                 style="@style/Widget.StoryApp.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="8dp"
                 android:hint="@string/password"
                 app:endIconMode="password_toggle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_email"
+                app:layout_constraintTop_toBottomOf="@+id/login_email"
                 app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
                 <com.heyproject.storyapp.util.PasswordEditText
@@ -78,7 +78,7 @@
                 android:text="@string/sign_in"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_password" />
+                app:layout_constraintTop_toBottomOf="@+id/login_password" />
 
             <TextView
                 android:id="@+id/textView2"

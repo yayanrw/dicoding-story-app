@@ -1,6 +1,7 @@
 package com.heyproject.storyapp.ui.login
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,10 +67,35 @@ class LoginFragment : Fragment() {
     }
 
     fun signIn() {
-        viewModel.signIn(
-            binding!!.edLoginEmail.text.toString(),
-            binding!!.edLoginPassword.text.toString()
-        )
+        if (formValidation()) {
+            viewModel.signIn(
+                binding!!.edLoginEmail.text.toString(),
+                binding!!.edLoginPassword.text.toString()
+            )
+        }
+    }
+
+    private fun formValidation(): Boolean {
+        var isValid = true
+        if (binding?.edLoginEmail?.text.isNullOrEmpty()) {
+            binding?.loginEmail?.error = getString(R.string.required)
+            isValid = false
+        } else {
+            if (!Patterns.EMAIL_ADDRESS.matcher(binding?.edLoginEmail?.text.toString()).matches()) {
+                binding?.loginEmail?.error = getString(R.string.not_valid_email)
+                isValid = false
+            } else {
+                binding?.loginEmail?.error = null
+            }
+        }
+
+        if (binding?.edLoginPassword?.text.isNullOrEmpty()) {
+            binding?.loginPassword?.error = getString(R.string.required)
+            isValid = false
+        } else {
+            binding?.loginPassword?.error = null
+        }
+        return isValid
     }
 
     private fun isLoggedIn() {

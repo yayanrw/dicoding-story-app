@@ -50,8 +50,8 @@ class RegisterFragment : Fragment() {
             with(viewModel) {
                 register(
                     binding!!.edRegisterName.text.toString(),
-                    binding!!.edLoginEmail.text.toString(),
-                    binding!!.edLoginPassword.text.toString()
+                    binding!!.edRegisterEmail.text.toString(),
+                    binding!!.edRegisterPassword.text.toString()
                 )
             }
         }
@@ -66,11 +66,11 @@ class RegisterFragment : Fragment() {
             binding?.registerName?.error = null
         }
 
-        if (binding?.edLoginEmail?.text.isNullOrEmpty()) {
+        if (binding?.edRegisterEmail?.text.isNullOrEmpty()) {
             binding?.registerEmail?.error = getString(R.string.required)
             isValid = false
         } else {
-            if (!Patterns.EMAIL_ADDRESS.matcher(binding?.edLoginEmail?.text.toString()).matches()) {
+            if (!Patterns.EMAIL_ADDRESS.matcher(binding?.edRegisterEmail?.text.toString()).matches()) {
                 binding?.registerEmail?.error = getString(R.string.not_valid_email)
                 isValid = false
             } else {
@@ -78,7 +78,7 @@ class RegisterFragment : Fragment() {
             }
         }
 
-        if (binding?.edLoginPassword?.text.isNullOrEmpty()) {
+        if (binding?.edRegisterPassword?.text.isNullOrEmpty()) {
             binding?.registerPassword?.error = getString(R.string.required)
             isValid = false
         } else {
