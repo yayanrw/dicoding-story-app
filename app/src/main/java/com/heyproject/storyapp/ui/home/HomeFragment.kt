@@ -1,20 +1,14 @@
 package com.heyproject.storyapp.ui.home
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.heyproject.storyapp.R
+import com.heyproject.storyapp.util.UserPreference
 
 class HomeFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
+    private lateinit var userPreference: UserPreference
     private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(
@@ -26,7 +20,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        removeBackArrow()
+//        removeBackArrow()
+        userPreference = UserPreference(requireContext())
     }
 
     private fun removeBackArrow() {
