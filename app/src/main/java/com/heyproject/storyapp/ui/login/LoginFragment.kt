@@ -39,7 +39,7 @@ class LoginFragment : Fragment() {
             loginFragment = this@LoginFragment
         }
 
-        removeActionBar()
+        removeActionBar(true)
 
         userPreference = UserPreference(requireContext())
         isLoggedIn()
@@ -70,13 +70,18 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun removeActionBar() {
-        (activity as AppCompatActivity).supportActionBar?.hide()
+    private fun removeActionBar(remove: Boolean) {
+        if (remove) {
+            (activity as AppCompatActivity).supportActionBar?.hide()
+        } else {
+            (activity as AppCompatActivity).supportActionBar?.show()
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+        removeActionBar(false)
     }
 
     fun goToRegisterScreen() {
