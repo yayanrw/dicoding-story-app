@@ -7,9 +7,11 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.heyproject.storyapp.R
 import com.heyproject.storyapp.databinding.ActivityHomeBinding
+import com.heyproject.storyapp.model.User
 import com.heyproject.storyapp.util.UserPreference
 
 class HomeActivity : AppCompatActivity() {
@@ -28,6 +30,7 @@ class HomeActivity : AppCompatActivity() {
 
         userPreference = UserPreference(this)
 
+        isLoggedIn()
         setupActionBarWithNavController(navController)
     }
 
@@ -52,5 +55,12 @@ class HomeActivity : AppCompatActivity() {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.home_menu, menu)
         return true
+    }
+
+    private fun isLoggedIn() {
+        val user: User = userPreference.getUser()
+        if (user.token.isNullOrEmpty()) {
+            navController.navigate(R.id.action_homeFragment_to_mainActivity)
+        }
     }
 }
