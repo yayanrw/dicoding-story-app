@@ -1,4 +1,4 @@
-package com.heyproject.storyapp.util
+package com.heyproject.storyapp.customview
 
 import android.content.Context
 import android.text.Editable
