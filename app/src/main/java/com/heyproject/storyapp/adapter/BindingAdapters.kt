@@ -13,7 +13,7 @@ import com.heyproject.storyapp.util.RequestState
 @BindingAdapter("listData")
 fun bindRecyclerView(
     recyclerView: RecyclerView,
-    data: List<ListStoryItem>
+    data: List<ListStoryItem>?
 ) {
     val adapter = recyclerView.adapter as StoryAdapter
     adapter.submitList(data)

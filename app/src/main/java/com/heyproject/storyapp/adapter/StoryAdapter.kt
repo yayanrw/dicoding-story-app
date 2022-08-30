@@ -10,8 +10,8 @@ class StoryAdapter :
     RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
     private lateinit var stories: List<ListStoryItem>
 
-    fun submitList(stories: List<ListStoryItem>) {
-        this.stories = stories
+    fun submitList(stories: List<ListStoryItem>?) {
+        this.stories = stories ?: listOf()
     }
 
     class StoryViewHolder(var binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {

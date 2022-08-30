@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.heyproject.storyapp.adapter.StoryAdapter
 import com.heyproject.storyapp.databinding.FragmentHomeBinding
 import com.heyproject.storyapp.util.UserPreference
 
@@ -31,6 +32,7 @@ class HomeFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = viewModel
             homeFragment = this@HomeFragment
+            rvStory.adapter = StoryAdapter()
         }
     }
 }
