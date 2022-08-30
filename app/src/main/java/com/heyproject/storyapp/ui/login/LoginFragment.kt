@@ -49,13 +49,12 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.requestState.observe(viewLifecycleOwner) {
-            binding?.linearProgressIndicator?.visibility = when (it) {
-                RequestState.LOADING -> {
-                    View.VISIBLE
-                }
-                else -> {
-                    View.GONE
-                }
+            if (it == RequestState.LOADING) {
+                binding?.linearProgressIndicator?.visibility = View.VISIBLE
+                binding?.btnSignIn?.isEnabled = false
+            } else {
+                binding?.linearProgressIndicator?.visibility = View.GONE
+                binding?.btnSignIn?.isEnabled = true
             }
         }
 
