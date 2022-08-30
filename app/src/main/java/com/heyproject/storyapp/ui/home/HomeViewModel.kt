@@ -29,17 +29,18 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 _requestState.value = RequestState.LOADING
-                _stories.value = StoryApi.retrofitService.getStories(1, 10, 0).listStory
+                val stories = StoryApi.retrofitService.getStories(1, 10, 0)
+                _stories.value = stories.listStory
                 _requestState.value = RequestState.SUCCESS
-            } catch(e: HttpException) {
+            } catch (e: HttpException) {
                 _requestState.value = RequestState.ERROR
                 _message.value = "Oops, something went wrong!"
-            } catch(e: IOException) {
+                _stories.value = listOf()
+            } catch (e: IOException) {
                 _requestState.value = RequestState.ERROR
                 _message.value = "Couldn't reach server, check your internet connection."
+                _stories.value = listOf()
             }
         }
-
-
     }
 }

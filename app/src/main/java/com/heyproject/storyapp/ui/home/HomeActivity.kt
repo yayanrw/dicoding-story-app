@@ -30,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
 
         userPreference = UserPreference(this)
 
-        isLoggedIn()
+//        isLoggedIn()
         setupActionBarWithNavController(navController)
     }
 
