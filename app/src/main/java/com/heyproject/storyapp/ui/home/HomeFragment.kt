@@ -1,30 +1,36 @@
 package com.heyproject.storyapp.ui.home
 
 import android.os.Bundle
-import android.view.*
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.heyproject.storyapp.R
+import androidx.fragment.app.viewModels
+import com.heyproject.storyapp.databinding.FragmentHomeBinding
 import com.heyproject.storyapp.util.UserPreference
 
 class HomeFragment : Fragment() {
     private lateinit var userPreference: UserPreference
-    private lateinit var viewModel: HomeViewModel
+    private var binding: FragmentHomeBinding? = null
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        val fragmentBinding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = fragmentBinding
+        return fragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        removeBackArrow()
         userPreference = UserPreference(requireContext())
-    }
 
-    private fun removeBackArrow() {
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = viewModel
+            homeFragment = this@HomeFragment
+        }
     }
 }
