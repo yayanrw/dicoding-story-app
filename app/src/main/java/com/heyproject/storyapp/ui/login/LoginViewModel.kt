@@ -52,7 +52,7 @@ class LoginViewModel : ViewModel() {
             } catch (e: IOException) {
                 _requestState.value = RequestState.ERROR
                 _message.value = "Couldn't reach server, check your internet connection."
-                Log.e(com.heyproject.storyapp.ui.register.TAG, e.toString())
+                Log.e(TAG, e.toString())
             }
         }
     }
