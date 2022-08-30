@@ -2,6 +2,7 @@ package com.heyproject.storyapp.network
 
 import com.heyproject.storyapp.network.response.GeneralResponse
 import com.heyproject.storyapp.network.response.LoginResponse
+import com.heyproject.storyapp.network.response.StoriesResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -29,7 +30,7 @@ interface StoryService {
         @Part("description") description: RequestBody,
         @Part("lon") lon: RequestBody?,
         @Part("lat") lat: RequestBody?
-    )
+    ): GeneralResponse
 
     @Multipart
     @POST("stories")
@@ -38,12 +39,12 @@ interface StoryService {
         @Part("description") description: RequestBody,
         @Part("lon") lon: RequestBody?,
         @Part("lat") lat: RequestBody?
-    )
+    ): GeneralResponse
 
     @GET("stories?page={page}&size={size}&location={location}")
     suspend fun getStories(
         @Path("page") page: Int,
         @Path("size") size: Int,
         @Path("location") location: Int
-    ) : GeneralResponse
+    ) : StoriesResponse
 }
