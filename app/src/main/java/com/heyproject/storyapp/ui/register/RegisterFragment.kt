@@ -39,8 +39,16 @@ class RegisterFragment : Fragment() {
         }
 
         viewModel.requestState.observe(viewLifecycleOwner) {
-            if (it == RequestState.SUCCESS) {
-                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            if (it == RequestState.LOADING) {
+                binding?.linearProgressIndicator?.visibility = View.VISIBLE
+                binding?.btnRegister?.isEnabled = false
+            } else {
+                binding?.linearProgressIndicator?.visibility = View.GONE
+                binding?.btnRegister?.isEnabled = true
+
+                if (it == RequestState.SUCCESS) {
+                    findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                }
             }
         }
     }
@@ -70,7 +78,9 @@ class RegisterFragment : Fragment() {
             binding?.registerEmail?.error = getString(R.string.required)
             isValid = false
         } else {
-            if (!Patterns.EMAIL_ADDRESS.matcher(binding?.edRegisterEmail?.text.toString()).matches()) {
+            if (!Patterns.EMAIL_ADDRESS.matcher(binding?.edRegisterEmail?.text.toString())
+                    .matches()
+            ) {
                 binding?.registerEmail?.error = getString(R.string.not_valid_email)
                 isValid = false
             } else {
