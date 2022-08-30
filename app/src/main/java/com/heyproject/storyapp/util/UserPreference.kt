@@ -28,4 +28,8 @@ internal class UserPreference(context: Context) {
         user.token = preference.getString(TOKEN, "")
         return user
     }
+
+    fun removeSharedPref() {
+        preference.edit().clear().apply()
+    }
 }
