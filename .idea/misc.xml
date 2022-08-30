@@ -6,11 +6,14 @@
         <entry key="..\:/Project/AndroidStudio/StoryApp/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.144" />
         <entry key="..\:/Project/AndroidStudio/StoryApp/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.144" />
         <entry key="..\:/Project/AndroidStudio/StoryApp/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.144" />
+        <entry key="..\:/Project/AndroidStudio/StoryApp/app/src/main/res/drawable/ic_broken_image.xml" value="0.1575" />
+        <entry key="..\:/Project/AndroidStudio/StoryApp/app/src/main/res/drawable/loading_img.xml" value="0.1575" />
         <entry key="..\:/Project/AndroidStudio/StoryApp/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/Project/AndroidStudio/StoryApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Project/AndroidStudio/StoryApp/app/src/main/res/layout/fragment_home.xml" value="0.22760416666666666" />
         <entry key="..\:/Project/AndroidStudio/StoryApp/app/src/main/res/layout/fragment_login.xml" value="0.264" />
         <entry key="..\:/Project/AndroidStudio/StoryApp/app/src/main/res/layout/fragment_register.xml" value="0.2" />
+        <entry key="..\:/Project/AndroidStudio/StoryApp/app/src/main/res/layout/item_story.xml" value="0.264" />
         <entry key="..\:/Project/AndroidStudio/StoryApp/app/src/main/res/menu/home_menu.xml" value="0.340625" />
       </map>
     </option>
