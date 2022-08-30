@@ -13,4 +13,5 @@
     <string name="required">This field is Required</string>
     <string name="not_valid_email">This is not a valid email</string>
     <string name="log_out">Logout</string>
+    <string name="story_images">Story images</string>
 </resources>
