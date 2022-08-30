@@ -6,8 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.heyproject.storyapp.databinding.ItemStoryBinding
 import com.heyproject.storyapp.network.response.ListStoryItem
 
-class StoryAdapter(private var stories: List<ListStoryItem>) :
+class StoryAdapter :
     RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
+    private lateinit var stories: List<ListStoryItem>
+
+    fun submitList(stories: List<ListStoryItem>) {
+        this.stories = stories
+    }
+
     class StoryViewHolder(var binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(listStoryItem: ListStoryItem) {
             binding.tvName.text = listStoryItem.name
