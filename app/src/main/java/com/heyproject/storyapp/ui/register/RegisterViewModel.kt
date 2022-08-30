@@ -39,7 +39,11 @@ class RegisterViewModel : ViewModel() {
                 }
             } catch (e: HttpException) {
                 _requestState.value = RequestState.ERROR
-                _message.value = "Oops, something went wrong!"
+                if (e.code() == 400) {
+                    _message.value = "Email is already taken"
+                } else {
+                    _message.value = "Oops, something went wrong!"
+                }
                 Log.e(TAG, e.toString())
             } catch (e: IOException) {
                 _requestState.value = RequestState.ERROR
