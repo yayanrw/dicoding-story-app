@@ -96,7 +96,7 @@
                 app:passwordToggleEnabled="true"
                 app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
-                <com.heyproject.storyapp.util.PasswordEditText
+                <com.heyproject.storyapp.customview.PasswordEditText
                     android:id="@+id/ed_register_password"
                     style="@style/TextInputEditText"
                     android:inputType="textPassword" />
