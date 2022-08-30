@@ -44,7 +44,7 @@ class LoginViewModel : ViewModel() {
             } catch (e: HttpException) {
                 _requestState.value = RequestState.ERROR
                 if (e.code() == 401) {
-                    _message.value = "Invalid password"
+                    _message.value = "Your email or password is invalid"
                 } else {
                     _message.value = "Oops, something went wrong!"
                 }

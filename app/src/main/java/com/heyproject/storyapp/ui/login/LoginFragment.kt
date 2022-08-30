@@ -5,6 +5,7 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -38,11 +39,24 @@ class LoginFragment : Fragment() {
             loginFragment = this@LoginFragment
         }
 
+        removeActionBar()
+
         userPreference = UserPreference(requireContext())
         isLoggedIn()
 
         viewModel.message.observe(viewLifecycleOwner) {
             Snackbar.make(view, it!!, Snackbar.LENGTH_SHORT).show()
+        }
+
+        viewModel.requestState.observe(viewLifecycleOwner) {
+            binding?.linearProgressIndicator?.visibility = when (it) {
+                RequestState.LOADING -> {
+                    View.VISIBLE
+                }
+                else -> {
+                    View.GONE
+                }
+            }
         }
 
         viewModel.loginResult.observe(viewLifecycleOwner) {
@@ -55,6 +69,10 @@ class LoginFragment : Fragment() {
             userPreference.setUser(user)
             isLoggedIn()
         }
+    }
+
+    private fun removeActionBar() {
+        (activity as AppCompatActivity).supportActionBar?.hide()
     }
 
     override fun onDestroyView() {
