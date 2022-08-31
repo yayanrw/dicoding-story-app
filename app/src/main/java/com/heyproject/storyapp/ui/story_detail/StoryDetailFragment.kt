@@ -34,4 +34,9 @@ class StoryDetailFragment : Fragment() {
         }
         binding?.executePendingBindings()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }

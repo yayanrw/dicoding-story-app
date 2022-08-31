@@ -96,4 +96,9 @@ class RegisterFragment : Fragment() {
         }
         return isValid
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }
