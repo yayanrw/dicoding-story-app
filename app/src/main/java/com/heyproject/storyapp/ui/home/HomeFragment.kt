@@ -32,7 +32,13 @@ class HomeFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = viewModel
             homeFragment = this@HomeFragment
-            rvStory.adapter = StoryAdapter()
+            rvStory.adapter = StoryAdapter(listOf())
+            rvStory.setHasFixedSize(true)
+        }
+        viewModel.getStoryList()
+
+        viewModel.stories.observe(viewLifecycleOwner) {
+            binding?.rvStory?.adapter = StoryAdapter(it)
         }
     }
 }
