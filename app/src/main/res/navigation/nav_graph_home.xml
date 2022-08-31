@@ -28,6 +28,18 @@
         <action
             android:id="@+id/action_storyDetailFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue="story_name" />
+        <argument
+            android:name="description"
+            app:argType="string"
+            android:defaultValue="story_description" />
+        <argument
+            android:name="photoUrl"
+            app:argType="string"
+            android:defaultValue="photo_url" />
     </fragment>
     <fragment
         android:id="@+id/storyAddFragment"
