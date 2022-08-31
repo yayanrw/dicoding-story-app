@@ -23,23 +23,26 @@
     <fragment
         android:id="@+id/storyDetailFragment"
         android:name="com.heyproject.storyapp.ui.story_detail.StoryDetailFragment"
-        android:label="fragment_story_detail"
-        tools:layout="@layout/fragment_story_detail" >
+        android:label="Story Detail"
+        tools:layout="@layout/fragment_story_detail">
         <action
             android:id="@+id/action_storyDetailFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="name"
-            app:argType="string"
-            android:defaultValue="story_name" />
+            android:defaultValue="story_name"
+            app:argType="string" />
         <argument
             android:name="description"
-            app:argType="string"
-            android:defaultValue="story_description" />
+            android:defaultValue="story_description"
+            app:argType="string" />
         <argument
             android:name="photoUrl"
-            app:argType="string"
-            android:defaultValue="photo_url" />
+            android:defaultValue="photo_url"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/storyAddFragment"
