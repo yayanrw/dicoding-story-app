@@ -34,10 +34,9 @@ class PasswordEditText : TextInputEditText {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                error = if (s!!.length < 7) {
-                    context.getString(R.string.minlength)
-                } else {
-                    null
+                if (s!!.length < 7) {
+                    setError(context.getString(R.string.minlength), null)
+
                 }
             }
         })
