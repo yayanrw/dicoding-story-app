@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.heyproject.storyapp.R
 import com.heyproject.storyapp.adapter.StoryAdapter
 import com.heyproject.storyapp.databinding.FragmentHomeBinding
 import com.heyproject.storyapp.network.response.ListStoryItem
@@ -57,6 +58,10 @@ class HomeFragment : Fragment() {
                 }
             })
         }
+    }
+
+    fun goToStoryAddScreen() {
+        findNavController().navigate(R.id.action_homeFragment_to_storyAddFragment)
     }
 
     override fun onDestroyView() {
