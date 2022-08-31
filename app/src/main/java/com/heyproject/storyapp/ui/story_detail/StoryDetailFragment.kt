@@ -1,32 +1,37 @@
 package com.heyproject.storyapp.ui.story_detail
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.heyproject.storyapp.R
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
+import com.heyproject.storyapp.databinding.FragmentStoryDetailBinding
+import com.heyproject.storyapp.network.response.ListStoryItem
 
 class StoryDetailFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = StoryDetailFragment()
-    }
-
-    private lateinit var viewModel: StoryDetailViewModel
+    private var binding: FragmentStoryDetailBinding? = null
+    private val args: StoryDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_story_detail, container, false)
+    ): View {
+        val fragmentBinding = FragmentStoryDetailBinding.inflate(inflater, container, false)
+        binding = fragmentBinding
+        return fragmentBinding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(StoryDetailViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val storyItem = ListStoryItem(
+            name = args.name,
+            description = args.description,
+            photoUrl = args.photoUrl
+        )
+        binding?.apply {
+            story = storyItem
+        }
+        binding?.executePendingBindings()
     }
-
 }
