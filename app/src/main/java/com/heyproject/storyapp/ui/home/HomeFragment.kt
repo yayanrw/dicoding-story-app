@@ -6,14 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.heyproject.storyapp.adapter.StoryAdapter
 import com.heyproject.storyapp.databinding.FragmentHomeBinding
+import com.heyproject.storyapp.network.response.ListStoryItem
 import com.heyproject.storyapp.util.UserPreference
 
 class HomeFragment : Fragment() {
     private lateinit var userPreference: UserPreference
     private var binding: FragmentHomeBinding? = null
     private val viewModel: HomeViewModel by viewModels()
+    private lateinit var storyAdapter: StoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,10 +38,24 @@ class HomeFragment : Fragment() {
             rvStory.adapter = StoryAdapter(listOf())
             rvStory.setHasFixedSize(true)
         }
+
         viewModel.getStoryList(userPreference.getUser().token!!)
 
         viewModel.stories.observe(viewLifecycleOwner) {
-            binding?.rvStory?.adapter = StoryAdapter(it)
+            storyAdapter = StoryAdapter(it)
+            binding?.rvStory?.adapter = storyAdapter
+
+            storyAdapter.setOnItemClickCallBack(object : StoryAdapter.OnItemClickCallback {
+                override fun onItemClicked(storyItem: ListStoryItem) {
+                    val toStoryDetailFragment =
+                        HomeFragmentDirections.actionHomeFragmentToStoryDetailFragment(
+                            storyItem.name!!,
+                            storyItem.description!!,
+                            storyItem.photoUrl!!
+                        )
+                    findNavController().navigate(toStoryDetailFragment)
+                }
+            })
         }
     }
 }
