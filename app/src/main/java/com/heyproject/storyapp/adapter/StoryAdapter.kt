@@ -8,6 +8,11 @@ import com.heyproject.storyapp.network.response.ListStoryItem
 
 class StoryAdapter(private val stories: List<ListStoryItem>?) :
     RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallBack(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     class StoryViewHolder(var binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(listStoryItem: ListStoryItem?) {
@@ -25,7 +30,12 @@ class StoryAdapter(private val stories: List<ListStoryItem>?) :
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
         val story = stories?.get(position)
         holder.bind(story)
+        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(story!!) }
     }
 
     override fun getItemCount(): Int = stories?.size ?: 0
+
+    interface OnItemClickCallback {
+        fun onItemClicked(storyItem: ListStoryItem)
+    }
 }
