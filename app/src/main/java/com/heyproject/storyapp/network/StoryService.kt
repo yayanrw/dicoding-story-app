@@ -38,13 +38,15 @@ interface StoryService {
         @Part photo: MultipartBody.Part,
         @Part("description") description: RequestBody,
         @Part("lon") lon: RequestBody?,
-        @Part("lat") lat: RequestBody?
+        @Part("lat") lat: RequestBody?,
+        @Header("Authorization") auth: String
     ): GeneralResponse
 
-    @GET("stories?page={page}&size={size}&location={location}")
+    @GET("stories")
     suspend fun getStories(
-        @Path("page") page: Int,
-        @Path("size") size: Int,
-        @Path("location") location: Int
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("location") location: Int,
+        @Header("Authorization") auth: String
     ) : StoriesResponse
 }
