@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
             rvStory.adapter = StoryAdapter(listOf())
             rvStory.setHasFixedSize(true)
         }
-        viewModel.getStoryList()
+        viewModel.getStoryList(userPreference.getUser().token!!)
 
         viewModel.stories.observe(viewLifecycleOwner) {
             binding?.rvStory?.adapter = StoryAdapter(it)

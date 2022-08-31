@@ -21,16 +21,16 @@ class HomeViewModel : ViewModel() {
     private val _stories = MutableLiveData<List<ListStoryItem>?>()
     val stories: LiveData<List<ListStoryItem>?> = _stories
 
-    init {
-        getStories()
-    }
-
-    private fun getStories() {
+    fun getStoryList(token: String) {
         viewModelScope.launch {
             try {
                 _requestState.value = RequestState.LOADING
-                val stories = StoryApi.retrofitService.getStories(1, 10, 0)
-                _stories.value = stories.listStory
+                _stories.value = StoryApi.retrofitService.getStories(
+                    1,
+                    10,
+                    0,
+                    "Bearer $token"
+                ).listStory
                 _requestState.value = RequestState.SUCCESS
             } catch (e: HttpException) {
                 _requestState.value = RequestState.ERROR
