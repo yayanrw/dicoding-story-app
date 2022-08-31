@@ -10,16 +10,6 @@ import com.heyproject.storyapp.R
 import com.heyproject.storyapp.network.response.ListStoryItem
 import com.heyproject.storyapp.util.RequestState
 
-@BindingAdapter("listData")
-fun bindRecyclerView(
-    recyclerView: RecyclerView,
-    data: List<ListStoryItem>?
-) {
-    val adapter = recyclerView.adapter as StoryAdapter
-    adapter.submitList(data)
-
-}
-
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
