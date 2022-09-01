@@ -85,6 +85,7 @@ class StoryAddActivity : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedImg: Uri = result.data?.data as Uri
+            val myFile = uriToFile(selectedImg, this)
             binding.ivPreview.setImageURI(selectedImg)
         }
     }
