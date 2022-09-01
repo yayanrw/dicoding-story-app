@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_storyAddActivity"
+            app:destination="@id/storyAddActivity" />
     </fragment>
     <fragment
         android:id="@+id/storyDetailFragment"
@@ -46,4 +49,9 @@
         android:name="com.heyproject.storyapp.ui.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <activity
+        android:id="@+id/storyAddActivity"
+        android:name="com.heyproject.storyapp.ui.story_add.StoryAddActivity"
+        android:label="activity_story_add"
+        tools:layout="@layout/activity_story_add" />
 </navigation>

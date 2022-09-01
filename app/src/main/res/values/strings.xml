@@ -15,4 +15,8 @@
     <string name="log_out">Logout</string>
     <string name="story_images">Story images</string>
     <string name="add_new_story">Add new story</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="description">Description</string>
+    <string name="upload">Upload</string>
 </resources>

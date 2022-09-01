@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
     }
 
     fun goToStoryAddScreen() {
-//        findNavController().navigate(R.id.action_homeFragment_to_storyAddFragment)
+        findNavController().navigate(R.id.action_homeFragment_to_storyAddActivity)
     }
 
     override fun onDestroyView() {
