@@ -138,8 +138,15 @@ class StoryAddActivity : AppCompatActivity() {
                         description = description,
                         auth = "Bearer ${userPreference.getUser().token!!}"
                     )
-                    Toast.makeText(this@StoryAddActivity, response.message, Toast.LENGTH_SHORT)
-                        .show()
+
+                    if (!response.error!!) {
+                        Toast.makeText(this@StoryAddActivity, response.message, Toast.LENGTH_SHORT)
+                            .show()
+                        finish()
+                    } else {
+                        Toast.makeText(this@StoryAddActivity, response.message, Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 } catch (e: HttpException) {
                     Toast.makeText(this@StoryAddActivity, getString(R.string.oops), Toast.LENGTH_SHORT)
                         .show()

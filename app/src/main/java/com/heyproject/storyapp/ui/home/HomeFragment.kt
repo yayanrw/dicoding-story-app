@@ -60,6 +60,11 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getStoryList(userPreference.getUser().token!!)
+    }
+
     fun goToStoryAddScreen() {
         findNavController().navigate(R.id.action_homeFragment_to_storyAddActivity)
     }
