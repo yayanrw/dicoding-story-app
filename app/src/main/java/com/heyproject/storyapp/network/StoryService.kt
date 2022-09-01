@@ -24,21 +24,10 @@ interface StoryService {
     ): LoginResponse
 
     @Multipart
-    @POST("stories/guest")
-    suspend fun insertGuestStory(
-        @Part photo: MultipartBody.Part,
-        @Part("description") description: RequestBody,
-        @Part("lon") lon: RequestBody?,
-        @Part("lat") lat: RequestBody?
-    ): GeneralResponse
-
-    @Multipart
     @POST("stories")
     suspend fun insertStory(
         @Part photo: MultipartBody.Part,
         @Part("description") description: RequestBody,
-        @Part("lon") lon: RequestBody?,
-        @Part("lat") lat: RequestBody?,
         @Header("Authorization") auth: String
     ): GeneralResponse
 
