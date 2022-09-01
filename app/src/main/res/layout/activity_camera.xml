@@ -29,7 +29,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_baseline_photo_camera_24" />
+            app:srcCompat="@drawable/ic_baseline_photo_camera_24"
+            android:onClick="@{() -> cameraActivity.takePhoto()}"/>
 
         <ImageView
             android:id="@+id/switchCamera"
