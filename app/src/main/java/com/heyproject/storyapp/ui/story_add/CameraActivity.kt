@@ -1,5 +1,6 @@
 package com.heyproject.storyapp.ui.story_add
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -78,11 +79,14 @@ class CameraActivity : AppCompatActivity() {
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    Toast.makeText(
-                        this@CameraActivity,
-                        "Berhasil mengambil gambar.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    val intent = Intent()
+                    intent.putExtra("picture", photoFile)
+                    intent.putExtra(
+                        "isBackCamera",
+                        cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA
+                    )
+                    setResult(StoryAddActivity.CAMERA_X_RESULT, intent)
+                    finish()
                 }
             }
         )
