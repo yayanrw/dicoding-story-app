@@ -19,4 +19,6 @@
     <string name="gallery">Gallery</string>
     <string name="description">Description</string>
     <string name="upload">Upload</string>
+    <string name="oops">Oops, something went wrong!</string>
+    <string name="check_connection">Couldn\'t reach server, check your internet connection.</string>
 </resources>
