@@ -53,7 +53,8 @@
                 android:text="@string/gallery"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_camera"
-                app:layout_constraintTop_toBottomOf="@+id/iv_preview" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_preview"
+                android:onClick="@{() -> storyAddActivity.startGallery()}"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"

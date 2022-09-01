@@ -2,8 +2,10 @@ package com.heyproject.storyapp.ui.story_add
 
 import android.Manifest
 import android.content.Intent
+import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -12,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.heyproject.storyapp.databinding.ActivityStoryAddBinding
 import com.heyproject.storyapp.util.rotateBitmap
+import com.heyproject.storyapp.util.uriToFile
 import java.io.File
 
 class StoryAddActivity : AppCompatActivity() {
@@ -75,6 +78,23 @@ class StoryAddActivity : AppCompatActivity() {
 
             binding.ivPreview.setImageBitmap(result)
         }
+    }
+
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedImg: Uri = result.data?.data as Uri
+            binding.ivPreview.setImageURI(selectedImg)
+        }
+    }
+
+    fun startGallery() {
+        val intent = Intent()
+        intent.action = ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherIntentGallery.launch(chooser)
     }
 
     companion object {
