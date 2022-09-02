@@ -98,7 +98,7 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getStoryList(userPreference.getUser().token!!)
+        fetchStories()
     }
 
     fun fetchStories() {
