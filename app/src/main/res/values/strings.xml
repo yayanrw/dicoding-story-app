@@ -22,4 +22,5 @@
     <string name="oops">Oops, something went wrong!</string>
     <string name="check_connection">Couldn\'t reach server, check your internet connection.</string>
     <string name="no_data_available">No data available</string>
+    <string name="refresh">Refresh</string>
 </resources>

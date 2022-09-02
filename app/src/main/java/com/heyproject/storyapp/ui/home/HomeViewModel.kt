@@ -25,16 +25,21 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 _requestState.value = RequestState.LOADING
-                _stories.value = StoryApi.retrofitService.getStories(
+                val responseListStories = StoryApi.retrofitService.getStories(
                     1,
                     10,
                     0,
                     "Bearer $token"
                 ).listStory
-                _requestState.value = RequestState.SUCCESS
+                _stories.value = responseListStories
+                if (responseListStories.isNullOrEmpty()) {
+                    _requestState.value = RequestState.NODATA
+                } else {
+                    _requestState.value = RequestState.SUCCESS
+                }
             } catch (e: HttpException) {
                 _requestState.value = RequestState.ERROR
-                _message.value = "Oops, something went wrong!"
+                _message.value = "Oops, something went wrong! Please try again."
                 _stories.value = listOf()
             } catch (e: IOException) {
                 _requestState.value = RequestState.ERROR
