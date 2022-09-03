@@ -11,11 +11,17 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
 import com.heyproject.storyapp.databinding.FragmentRegisterBinding
+import com.heyproject.storyapp.model.UserPreference
+import com.heyproject.storyapp.model.dataStore
+import com.heyproject.storyapp.ui.ViewModelFactory
 import com.heyproject.storyapp.util.RequestState
 
 class RegisterFragment : Fragment() {
     private var binding: FragmentRegisterBinding? = null
-    private val viewModel: RegisterViewModel by viewModels()
+    private lateinit var userPreference: UserPreference
+    private val viewModel: RegisterViewModel by viewModels() {
+        ViewModelFactory(userPreference)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +34,18 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        userPreference = UserPreference(requireContext().dataStore)
+
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = viewModel
             registerFragment = this@RegisterFragment
+        }
+
+        viewModel.getUser().observe(viewLifecycleOwner) {
+            if (it.isLogin) {
+                findNavController().navigate(R.id.action_loginFragment_to_homeActivity)
+            }
         }
 
         viewModel.requestState.observe(viewLifecycleOwner) {
