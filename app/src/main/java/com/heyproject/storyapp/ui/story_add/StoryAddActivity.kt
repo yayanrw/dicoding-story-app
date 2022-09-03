@@ -150,7 +150,7 @@ class StoryAddActivity : AppCompatActivity() {
                     Toast.makeText(this@StoryAddActivity, getString(R.string.oops), Toast.LENGTH_SHORT)
                         .show()
                 } catch (e: IOException) {
-                    Toast.makeText(this@StoryAddActivity, getString(R.string.check_connection), Toast.LENGTH_SHORT)
+                    Toast.makeText(this@StoryAddActivity, getString(R.string.no_connection), Toast.LENGTH_SHORT)
                         .show()
                 }
             }

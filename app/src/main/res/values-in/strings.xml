@@ -21,7 +21,7 @@
     <string name="description">Keterangan</string>
     <string name="upload">Unggah</string>
     <string name="oops">Ups! Ada yang tidak beres!</string>
-    <string name="check_connection">Tidak dapat menjangkau server, periksa koneksi internet Anda.</string>
+    <string name="no_connection">Tidak dapat menjangkau server, periksa koneksi internet Anda.</string>
     <string name="no_data_available">Tidak ada data yang tersedia</string>
     <string name="refresh">Segarkan</string>
 </resources>

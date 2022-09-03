@@ -35,18 +35,8 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <include
-                android:id="@+id/screen_nodata"
-                layout="@layout/screen_nodata"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <include
                 android:id="@+id/screen_error"
                 layout="@layout/screen_error"
-                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

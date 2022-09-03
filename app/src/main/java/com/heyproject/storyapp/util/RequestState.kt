@@ -4,5 +4,6 @@ enum class RequestState {
     SUCCESS,
     ERROR,
     LOADING,
-    NODATA
+    NO_DATA,
+    NO_CONNECTION
 }

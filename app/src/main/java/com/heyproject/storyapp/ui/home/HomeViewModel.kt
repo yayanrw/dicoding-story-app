@@ -15,9 +15,6 @@ class HomeViewModel : ViewModel() {
     private val _requestState = MutableLiveData<RequestState>()
     val requestState: LiveData<RequestState> = _requestState
 
-    private val _message = MutableLiveData<String>()
-    val message: LiveData<String> = _message
-
     private val _stories = MutableLiveData<List<ListStoryItem>?>()
     val stories: LiveData<List<ListStoryItem>?> = _stories
 
@@ -33,17 +30,15 @@ class HomeViewModel : ViewModel() {
                 ).listStory
                 _stories.value = responseListStories
                 if (responseListStories.isNullOrEmpty()) {
-                    _requestState.value = RequestState.NODATA
+                    _requestState.value = RequestState.NO_DATA
                 } else {
                     _requestState.value = RequestState.SUCCESS
                 }
             } catch (e: HttpException) {
                 _requestState.value = RequestState.ERROR
-                _message.value = "Oops, something went wrong! Please try again."
                 _stories.value = listOf()
             } catch (e: IOException) {
-                _requestState.value = RequestState.ERROR
-                _message.value = "Couldn't reach server, check your internet connection."
+                _requestState.value = RequestState.NO_CONNECTION
                 _stories.value = listOf()
             }
         }

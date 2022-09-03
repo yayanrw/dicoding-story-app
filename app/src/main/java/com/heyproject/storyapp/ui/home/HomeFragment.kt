@@ -68,31 +68,31 @@ class HomeFragment : Fragment() {
                     binding?.circularProgressIndicator?.visibility = View.VISIBLE
                     binding?.rvStory?.visibility = View.GONE
                     binding?.screenError?.root?.visibility = View.GONE
-                    binding?.screenNodata?.root?.visibility = View.GONE
                 }
-                RequestState.NODATA -> {
+                RequestState.NO_DATA -> {
                     binding?.circularProgressIndicator?.visibility = View.GONE
                     binding?.rvStory?.visibility = View.GONE
-                    binding?.screenError?.root?.visibility = View.GONE
-                    binding?.screenNodata?.root?.visibility = View.VISIBLE
+                    binding?.screenError?.root?.visibility = View.VISIBLE
+                    binding?.screenError?.tvError?.text = getString(R.string.no_data_available)
                 }
                 RequestState.ERROR -> {
                     binding?.circularProgressIndicator?.visibility = View.GONE
                     binding?.rvStory?.visibility = View.GONE
                     binding?.screenError?.root?.visibility = View.VISIBLE
-                    binding?.screenNodata?.root?.visibility = View.GONE
+                    binding?.screenError?.tvError?.text = getString(R.string.oops)
+                }
+                RequestState.NO_CONNECTION -> {
+                    binding?.circularProgressIndicator?.visibility = View.GONE
+                    binding?.rvStory?.visibility = View.GONE
+                    binding?.screenError?.root?.visibility = View.VISIBLE
+                    binding?.screenError?.tvError?.text = getString(R.string.no_connection)
                 }
                 else -> {
                     binding?.circularProgressIndicator?.visibility = View.GONE
                     binding?.rvStory?.visibility = View.VISIBLE
                     binding?.screenError?.root?.visibility = View.GONE
-                    binding?.screenNodata?.root?.visibility = View.GONE
                 }
             }
-        }
-
-        viewModel.message.observe(viewLifecycleOwner) {
-            binding?.screenError?.tvError?.text = it
         }
     }
 
