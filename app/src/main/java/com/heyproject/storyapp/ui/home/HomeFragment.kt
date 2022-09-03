@@ -53,7 +53,7 @@ class HomeFragment : Fragment() {
 
         viewModel.getUser().observe(viewLifecycleOwner) {
             if (!it.isLogin) {
-                findNavController().navigate(R.id.action_homeFragment_to_mainActivity)
+                findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
             }
         }
 

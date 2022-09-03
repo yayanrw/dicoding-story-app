@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
@@ -21,11 +22,16 @@ import com.heyproject.storyapp.util.RequestState
 
 class LoginFragment : Fragment() {
 
+    companion object {
+        const val LOGIN_SUCCESSFUL: String = "LOGIN_SUCCESSFUL"
+    }
+
     private var binding: FragmentLoginBinding? = null
     private lateinit var userPreference: UserPreference
     private val viewModel: LoginViewModel by viewModels() {
         ViewModelFactory(userPreference)
     }
+    private lateinit var savedStateHandle: SavedStateHandle
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +46,8 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         removeActionBar(true)
         userPreference = UserPreference(requireContext().dataStore)
+        savedStateHandle = findNavController().previousBackStackEntry!!.savedStateHandle
+        savedStateHandle[LOGIN_SUCCESSFUL] = false
 
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -49,7 +57,8 @@ class LoginFragment : Fragment() {
 
         viewModel.getUser().observe(viewLifecycleOwner) {
             if (it.isLogin) {
-                findNavController().navigate(R.id.action_loginFragment_to_homeActivity)
+                savedStateHandle.set(LOGIN_SUCCESSFUL, true)
+                findNavController().popBackStack()
             }
         }
 
@@ -146,10 +155,13 @@ class LoginFragment : Fragment() {
 
     private fun playAnimation() {
         val appName = ObjectAnimator.ofFloat(binding?.tvAppName, View.ALPHA, 1f).setDuration(300)
-        val loginEmail = ObjectAnimator.ofFloat(binding?.loginEmail, View.ALPHA, 1f).setDuration(300)
-        val loginPassword = ObjectAnimator.ofFloat(binding?.loginPassword, View.ALPHA, 1f).setDuration(300)
+        val loginEmail =
+            ObjectAnimator.ofFloat(binding?.loginEmail, View.ALPHA, 1f).setDuration(300)
+        val loginPassword =
+            ObjectAnimator.ofFloat(binding?.loginPassword, View.ALPHA, 1f).setDuration(300)
         val btnSignIn = ObjectAnimator.ofFloat(binding?.btnSignIn, View.ALPHA, 1f).setDuration(300)
-        val lnrNotRegistered = ObjectAnimator.ofFloat(binding?.lnrNotRegistered, View.ALPHA, 1f).setDuration(300)
+        val lnrNotRegistered =
+            ObjectAnimator.ofFloat(binding?.lnrNotRegistered, View.ALPHA, 1f).setDuration(300)
 
         AnimatorSet().apply {
             playSequentially(appName, loginEmail, loginPassword, btnSignIn, lnrNotRegistered)
