@@ -1,9 +1,7 @@
 package com.heyproject.storyapp.ui.story_add
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.heyproject.storyapp.model.User
 import com.heyproject.storyapp.model.UserPreference
 import com.heyproject.storyapp.network.StoryApi
 import com.heyproject.storyapp.util.RequestState
@@ -55,5 +53,9 @@ class StoryAddViewModel(private val pref: UserPreference) : ViewModel() {
                 _requestState.value = RequestState.NO_CONNECTION
             }
         }
+    }
+
+    fun getUser(): LiveData<User> {
+        return pref.getUser().asLiveData()
     }
 }

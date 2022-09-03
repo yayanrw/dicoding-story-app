@@ -52,27 +52,38 @@ class StoryAddActivity : AppCompatActivity() {
             storyAddActivity = this@StoryAddActivity
         }
 
-        viewModel.requestState.observe(this) {
-            if (it == RequestState.LOADING) {
-                setLoading(true)
-            } else if (it == RequestState.ERROR) {
-                setLoading(false)
-                Snackbar.make(binding.root, getString(R.string.oops), Snackbar.LENGTH_SHORT).show()
-            } else if (it == RequestState.NO_CONNECTION) {
-                setLoading(false)
-                Snackbar.make(
-                    binding.root,
-                    getString(R.string.no_connection),
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            } else {
-                setLoading(false)
-                Snackbar.make(
-                    binding.root,
-                    getString(R.string.upload_success),
-                    Snackbar.LENGTH_SHORT
-                ).show()
+        viewModel.getUser().observe(this) {
+            if (!it.isLogin) {
                 finish()
+            }
+        }
+
+        viewModel.requestState.observe(this) {
+            when (it) {
+                RequestState.LOADING -> {
+                    setLoading(true)
+                }
+                RequestState.ERROR -> {
+                    setLoading(false)
+                    Snackbar.make(binding.root, getString(R.string.oops), Snackbar.LENGTH_SHORT).show()
+                }
+                RequestState.NO_CONNECTION -> {
+                    setLoading(false)
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.no_connection),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                    setLoading(false)
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.upload_success),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    finish()
+                }
             }
         }
     }

@@ -139,11 +139,4 @@ class LoginFragment : Fragment() {
         }
         return isValid
     }
-
-    private fun isLoggedIn() {
-//        val user: User = userPreference.getUser()
-//        if (!user.token.isNullOrEmpty()) {
-//            findNavController().navigate(R.id.action_loginFragment_to_homeActivity)
-//        }
-    }
 }
