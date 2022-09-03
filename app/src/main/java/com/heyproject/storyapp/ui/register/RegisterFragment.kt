@@ -23,7 +23,7 @@ import com.heyproject.storyapp.util.RequestState
 class RegisterFragment : Fragment() {
     private var binding: FragmentRegisterBinding? = null
     private lateinit var userPreference: UserPreference
-    private val viewModel: RegisterViewModel by viewModels() {
+    private val viewModel: RegisterViewModel by viewModels {
         ViewModelFactory(userPreference)
     }
 

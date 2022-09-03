@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var userPreference: UserPreference
-    private val viewModel: HomeViewModel by viewModels() {
+    private val viewModel: HomeViewModel by viewModels {
         ViewModelFactory(userPreference)
     }
 
