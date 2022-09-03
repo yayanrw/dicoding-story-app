@@ -96,26 +96,33 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login_password" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/lnr_not_registered"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/not_registered_yet"
+                android:orientation="horizontal"
+                app:layout_constrainedWidth="true"
                 app:layout_constraintStart_toStartOf="@+id/btn_sign_in"
-                app:layout_constraintTop_toBottomOf="@+id/btn_sign_in" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_sign_in">
 
-            <TextView
-                android:id="@+id/tv_create_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:minHeight="48dp"
-                android:onClick="@{() -> loginFragment.goToRegisterScreen()}"
-                android:text="@string/create_an_account"
-                android:textColor="@color/purple_500"
-                app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toTopOf="@+id/textView2" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/not_registered_yet" />
+
+                <TextView
+                    android:id="@+id/tv_create_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:minHeight="48dp"
+                    android:onClick="@{() -> loginFragment.goToRegisterScreen()}"
+                    android:text="@string/create_an_account"
+                    android:textColor="@color/purple_500" />
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
