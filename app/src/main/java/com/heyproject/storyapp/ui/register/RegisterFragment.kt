@@ -46,7 +46,7 @@ class RegisterFragment : Fragment() {
 
         viewModel.getUser().observe(viewLifecycleOwner) {
             if (it.isLogin) {
-                findNavController().navigate(R.id.action_loginFragment_to_homeActivity)
+                findNavController().navigate(R.id.action_registerFragment_to_homeActivity)
             }
         }
 
