@@ -6,5 +6,6 @@ enum class RequestState {
     LOADING,
     NO_DATA,
     NO_CONNECTION,
-    INVALID_CREDENTIALS
+    INVALID_CREDENTIALS,
+    EMAIL_TAKEN
 }

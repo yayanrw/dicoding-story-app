@@ -24,4 +24,6 @@
     <string name="no_data_available">No data available</string>
     <string name="refresh">Refresh</string>
     <string name="invalid_credentials">Your email or password is invalid</string>
+    <string name="email_taken">This email already taken</string>
+    <string name="success_register">Register successfully, please login to continue</string>
 </resources>

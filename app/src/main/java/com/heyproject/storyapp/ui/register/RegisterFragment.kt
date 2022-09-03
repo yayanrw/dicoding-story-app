@@ -34,22 +34,42 @@ class RegisterFragment : Fragment() {
             registerFragment = this@RegisterFragment
         }
 
-        viewModel.message.observe(viewLifecycleOwner) {
-            Snackbar.make(view, it!!, Snackbar.LENGTH_SHORT).show()
-        }
-
         viewModel.requestState.observe(viewLifecycleOwner) {
-            if (it == RequestState.LOADING) {
-                binding?.linearProgressIndicator?.visibility = View.VISIBLE
-                binding?.btnRegister?.isEnabled = false
-            } else {
-                binding?.linearProgressIndicator?.visibility = View.GONE
-                binding?.btnRegister?.isEnabled = true
-
-                if (it == RequestState.SUCCESS) {
+            when (it) {
+                RequestState.LOADING -> {
+                    setLoading(true)
+                }
+                RequestState.ERROR -> {
+                    setLoading(false)
+                    Snackbar.make(view, getString(R.string.oops), Snackbar.LENGTH_SHORT).show()
+                }
+                RequestState.NO_CONNECTION -> {
+                    setLoading(false)
+                    Snackbar.make(view, getString(R.string.no_connection), Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+                RequestState.EMAIL_TAKEN -> {
+                    setLoading(false)
+                    Snackbar.make(view, getString(R.string.email_taken), Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+                else -> {
+                    setLoading(false)
+                    Snackbar.make(view, getString(R.string.success_register), Snackbar.LENGTH_SHORT)
+                        .show()
                     findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                 }
             }
+        }
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding?.linearProgressIndicator?.visibility = View.VISIBLE
+            binding?.btnRegister?.isEnabled = false
+        } else {
+            binding?.linearProgressIndicator?.visibility = View.GONE
+            binding?.btnRegister?.isEnabled = true
         }
     }
 

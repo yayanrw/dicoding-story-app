@@ -25,4 +25,6 @@
     <string name="no_data_available">Tidak ada data yang tersedia</string>
     <string name="refresh">Segarkan</string>
     <string name="invalid_credentials">Email atau kata sandi Anda tidak valid</string>
+    <string name="email_taken">Email ini sudah ada</string>
+    <string name="success_register">Daftar berhasil, silakan masuk untuk melanjutkan</string>
 </resources>
