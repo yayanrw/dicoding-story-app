@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import com.google.android.material.textfield.TextInputEditText
 import com.heyproject.storyapp.R
+import com.heyproject.storyapp.core.MIN_PASSWORD_LENGTH
 
 class PasswordEditText : TextInputEditText {
     constructor(context: Context) : super(context) {
@@ -34,9 +35,8 @@ class PasswordEditText : TextInputEditText {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if (s!!.length < 7) {
-                    setError(context.getString(R.string.minlength), null)
-
+                if (s!!.length < MIN_PASSWORD_LENGTH) {
+                    setError(context.getString(R.string.minlength, MIN_PASSWORD_LENGTH), null)
                 }
             }
         })

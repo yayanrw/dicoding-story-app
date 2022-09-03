@@ -14,14 +14,9 @@
             android:id="@+id/action_homeFragment_to_storyDetailFragment"
             app:destination="@id/storyDetailFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popExitAnim="@anim/slide_out_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/homeFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_mainActivity"
-            app:destination="@id/mainActivity"
-            app:popUpTo="@id/mainActivity"
-            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeFragment_to_storyAddActivity"
             app:destination="@id/storyAddActivity" />
@@ -54,9 +49,9 @@
             android:defaultValue="photo_url"
             app:argType="string" />
         <action
-            android:id="@+id/action_storyDetailFragment_to_mainActivity"
-            app:destination="@id/mainActivity"
-            app:popUpTo="@id/mainActivity"
+            android:id="@+id/action_storyDetailFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/storyDetailFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <activity

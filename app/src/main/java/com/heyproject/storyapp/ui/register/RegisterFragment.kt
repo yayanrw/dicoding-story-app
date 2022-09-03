@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
+import com.heyproject.storyapp.core.MIN_PASSWORD_LENGTH
 import com.heyproject.storyapp.databinding.FragmentRegisterBinding
 import com.heyproject.storyapp.model.UserPreference
 import com.heyproject.storyapp.model.dataStore
@@ -147,6 +148,9 @@ class RegisterFragment : Fragment() {
 
         if (binding?.edRegisterPassword?.text.isNullOrEmpty()) {
             binding?.registerPassword?.error = getString(R.string.required)
+            isValid = false
+        } else if (binding?.edRegisterPassword?.text?.length!! < MIN_PASSWORD_LENGTH) {
+            binding?.registerPassword?.error = getString(R.string.minlength, MIN_PASSWORD_LENGTH)
             isValid = false
         } else {
             binding?.registerPassword?.error = null

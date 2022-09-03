@@ -27,9 +27,6 @@
             android:exported="false"
             android:label="@string/add_new_story"/>
         <activity
-            android:name=".ui.home.HomeActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>

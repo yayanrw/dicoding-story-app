@@ -21,7 +21,7 @@ import com.heyproject.storyapp.util.RequestState
 class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding? = null
     private lateinit var userPreference: UserPreference
-    private val viewModel: HomeViewModel by viewModels() {
+    private val viewModel: HomeViewModel by viewModels {
         ViewModelFactory(
             userPreference
         )

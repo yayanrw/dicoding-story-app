@@ -10,7 +10,7 @@
     <string name="register">Daftar</string>
     <string name="register_now">Daftar sekarang</string>
     <string name="login">Masuk</string>
-    <string name="minlength">Kata sandi harus minimal 6 karakter</string>
+    <string name="minlength">Kata sandi harus minimal %1$d karakter</string>
     <string name="required">Bagian ini diperlukan</string>
     <string name="not_valid_email">Ini bukan email yang valid</string>
     <string name="log_out">Keluar</string>

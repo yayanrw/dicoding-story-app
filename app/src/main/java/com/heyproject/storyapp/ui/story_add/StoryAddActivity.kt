@@ -28,7 +28,7 @@ import java.io.File
 class StoryAddActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoryAddBinding
     private lateinit var userPreference: UserPreference
-    private val viewModel: StoryAddViewModel by viewModels() {
+    private val viewModel: StoryAddViewModel by viewModels {
         ViewModelFactory(userPreference)
     }
     private var getFile: File? = null

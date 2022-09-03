@@ -10,10 +10,10 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
+import com.heyproject.storyapp.core.MIN_PASSWORD_LENGTH
 import com.heyproject.storyapp.databinding.FragmentLoginBinding
 import com.heyproject.storyapp.model.UserPreference
 import com.heyproject.storyapp.model.dataStore
@@ -24,10 +24,9 @@ class LoginFragment : Fragment() {
 
     private var binding: FragmentLoginBinding? = null
     private lateinit var userPreference: UserPreference
-    private val viewModel: LoginViewModel by viewModels() {
+    private val viewModel: LoginViewModel by viewModels {
         ViewModelFactory(userPreference)
     }
-    private lateinit var savedStateHandle: SavedStateHandle
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -134,6 +133,9 @@ class LoginFragment : Fragment() {
 
         if (binding?.edLoginPassword?.text.isNullOrEmpty()) {
             binding?.loginPassword?.error = getString(R.string.required)
+            isValid = false
+        } else if (binding?.edLoginPassword?.text?.length!! < MIN_PASSWORD_LENGTH) {
+            binding?.loginPassword?.error = getString(R.string.minlength, MIN_PASSWORD_LENGTH)
             isValid = false
         } else {
             binding?.loginPassword?.error = null

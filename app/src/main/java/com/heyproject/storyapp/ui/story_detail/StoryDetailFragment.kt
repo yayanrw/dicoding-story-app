@@ -20,7 +20,7 @@ class StoryDetailFragment : Fragment() {
     private var binding: FragmentStoryDetailBinding? = null
     private lateinit var userPreference: UserPreference
     private val args: StoryDetailFragmentArgs by navArgs()
-    private val viewModel: StoryDetailViewModel by viewModels() {
+    private val viewModel: StoryDetailViewModel by viewModels {
         ViewModelFactory(userPreference)
     }
 
@@ -50,7 +50,7 @@ class StoryDetailFragment : Fragment() {
 
         viewModel.getUser().observe(viewLifecycleOwner) {
             if (!it.isLogin) {
-                findNavController().navigate(R.id.action_storyDetailFragment_to_mainActivity)
+                findNavController().navigate(R.id.action_storyDetailFragment_to_loginFragment)
             }
         }
     }
