@@ -1,7 +1,9 @@
 package com.heyproject.storyapp.model
 
 data class User(
-    var userId: String? = null,
-    var name: String? = null,
-    var token: String? = null,
+    var userId: String,
+    var name: String,
+    var email: String,
+    var token: String,
+    var isLogin: Boolean
 )
