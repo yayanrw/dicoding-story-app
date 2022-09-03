@@ -1,14 +1,10 @@
 package com.heyproject.storyapp.adapter
 
-import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.heyproject.storyapp.R
-import com.heyproject.storyapp.network.response.ListStoryItem
-import com.heyproject.storyapp.util.RequestState
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
@@ -21,19 +17,3 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     }
 }
 
-@BindingAdapter("imageStatus")
-fun bindStatus(statusImageView: ImageView, status: RequestState?) {
-    when (status) {
-        RequestState.LOADING -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.loading_animation)
-        }
-        RequestState.ERROR -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.ic_connection_error)
-        }
-        else -> {
-            statusImageView.visibility = View.GONE
-        }
-    }
-}
