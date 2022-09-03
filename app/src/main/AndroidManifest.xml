@@ -24,7 +24,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.story_add.StoryAddActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/add_new_story"/>
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="false" />

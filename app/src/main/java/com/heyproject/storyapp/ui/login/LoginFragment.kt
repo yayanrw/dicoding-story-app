@@ -22,10 +22,6 @@ import com.heyproject.storyapp.util.RequestState
 
 class LoginFragment : Fragment() {
 
-    companion object {
-        const val LOGIN_SUCCESSFUL: String = "LOGIN_SUCCESSFUL"
-    }
-
     private var binding: FragmentLoginBinding? = null
     private lateinit var userPreference: UserPreference
     private val viewModel: LoginViewModel by viewModels() {
@@ -44,10 +40,8 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        removeActionBar(true)
+        removeActionBar()
         userPreference = UserPreference(requireContext().dataStore)
-        savedStateHandle = findNavController().previousBackStackEntry!!.savedStateHandle
-        savedStateHandle[LOGIN_SUCCESSFUL] = false
 
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -57,8 +51,7 @@ class LoginFragment : Fragment() {
 
         viewModel.getUser().observe(viewLifecycleOwner) {
             if (it.isLogin) {
-                savedStateHandle.set(LOGIN_SUCCESSFUL, true)
-                findNavController().popBackStack()
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
         }
 
@@ -103,18 +96,13 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun removeActionBar(remove: Boolean) {
-        if (remove) {
-            (activity as AppCompatActivity).supportActionBar?.hide()
-        } else {
-            (activity as AppCompatActivity).supportActionBar?.show()
-        }
+    private fun removeActionBar() {
+        (activity as AppCompatActivity).supportActionBar?.hide()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-        removeActionBar(false)
     }
 
     fun goToRegisterScreen() {

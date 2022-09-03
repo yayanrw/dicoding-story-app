@@ -7,6 +7,7 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -36,6 +37,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        removeActionBar()
         userPreference = UserPreference(requireContext().dataStore)
 
         binding?.apply {
@@ -92,6 +94,10 @@ class RegisterFragment : Fragment() {
             playSequentially(appName, registerName, registerEmail, registerPassword, btnRegister)
             start()
         }
+    }
+
+    private fun removeActionBar() {
+        (activity as AppCompatActivity).supportActionBar?.hide()
     }
 
     private fun setLoading(isLoading: Boolean) {
