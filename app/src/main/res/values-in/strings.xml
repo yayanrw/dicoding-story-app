@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Story App</string>
+    <string name="email">Alamat Surel</string>
+    <string name="password">Kata sandi</string>
+    <string name="sign_in">Masuk</string>
+    <string name="not_registered_yet">Belum terdaftar?</string>
+    <string name="create_an_account">Buat sebuah Akun</string>
+    <string name="name">Nama</string>
+    <string name="register">Daftar</string>
+    <string name="register_now">Daftar sekarang</string>
+    <string name="login">Masuk</string>
+    <string name="minlength">Kata sandi harus minimal 6 karakter</string>
+    <string name="required">Bagian ini diperlukan</string>
+    <string name="not_valid_email">Ini bukan email yang valid</string>
+    <string name="log_out">Keluar</string>
+    <string name="story_images">Gambar cerita</string>
+    <string name="add_new_story">Tambahkan cerita baru</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="description">Keterangan</string>
+    <string name="upload">Unggah</string>
+    <string name="oops">Ups! Ada yang tidak beres!</string>
+    <string name="check_connection">Tidak dapat menjangkau server, periksa koneksi internet Anda.</string>
+    <string name="no_data_available">Tidak ada data yang tersedia</string>
+    <string name="refresh">Segarkan</string>
+</resources>
