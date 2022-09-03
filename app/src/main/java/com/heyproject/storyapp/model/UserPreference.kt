@@ -28,12 +28,6 @@ class UserPreference(private val dataStore: DataStore<Preferences>) {
         }
     }
 
-    fun getToken(): Flow<String> {
-        return dataStore.data.map { preferences ->
-            preferences[TOKEN_KEY] ?: ""
-        }
-    }
-
     suspend fun saveUser(user: User) {
         dataStore.edit { preferences ->
             preferences[USERID_KEY] = user.userId

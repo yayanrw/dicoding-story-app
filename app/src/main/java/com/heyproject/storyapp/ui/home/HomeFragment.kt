@@ -51,6 +51,12 @@ class HomeFragment : Fragment() {
 
         fetchStories()
 
+        viewModel.getUser().observe(viewLifecycleOwner) {
+            if (!it.isLogin) {
+                findNavController().navigate(R.id.action_homeFragment_to_mainActivity)
+            }
+        }
+
         viewModel.stories.observe(viewLifecycleOwner) {
             storyAdapter = StoryAdapter(listOf())
             storyAdapter = StoryAdapter(it)
@@ -109,7 +115,7 @@ class HomeFragment : Fragment() {
     }
 
     fun fetchStories() {
-//        viewModel.getStoryList(userPreference.getUser().token!!)
+        viewModel.fetchStories()
     }
 
     fun goToStoryAddScreen() {

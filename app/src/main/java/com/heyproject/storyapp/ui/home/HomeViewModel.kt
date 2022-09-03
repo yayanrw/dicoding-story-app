@@ -6,7 +6,9 @@ import com.heyproject.storyapp.model.UserPreference
 import com.heyproject.storyapp.network.StoryApi
 import com.heyproject.storyapp.network.response.ListStoryItem
 import com.heyproject.storyapp.util.RequestState
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -17,7 +19,10 @@ class HomeViewModel(private val pref: UserPreference) : ViewModel() {
     private val _stories = MutableLiveData<List<ListStoryItem>?>()
     val stories: LiveData<List<ListStoryItem>?> = _stories
 
-    fun getStoryList(token: String) {
+    fun fetchStories() {
+        val token = runBlocking {
+            pref.getUser().first().token
+        }
         viewModelScope.launch {
             try {
                 _requestState.value = RequestState.LOADING
