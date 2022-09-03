@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.heyproject.storyapp.model.UserPreference
 import com.heyproject.storyapp.network.StoryApi
 import com.heyproject.storyapp.network.response.LoginResult
 import com.heyproject.storyapp.util.RequestState
@@ -13,9 +14,7 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-const val TAG = "LoginViewModel"
-
-class LoginViewModel : ViewModel() {
+class LoginViewModel(private val pref: UserPreference) : ViewModel() {
     private val _requestState = MutableLiveData<RequestState>()
     val requestState: LiveData<RequestState> = _requestState
 
@@ -43,10 +42,8 @@ class LoginViewModel : ViewModel() {
                 } else {
                     _requestState.value = RequestState.ERROR
                 }
-                Log.e(TAG, e.toString())
             } catch (e: IOException) {
                 _requestState.value = RequestState.NO_CONNECTION
-                Log.e(TAG, e.toString())
             }
         }
     }

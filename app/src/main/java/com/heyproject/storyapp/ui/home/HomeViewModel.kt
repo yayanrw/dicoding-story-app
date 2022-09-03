@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.heyproject.storyapp.model.UserPreference
 import com.heyproject.storyapp.network.StoryApi
 import com.heyproject.storyapp.network.response.ListStoryItem
 import com.heyproject.storyapp.util.RequestState
@@ -11,7 +12,7 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val pref: UserPreference) : ViewModel() {
     private val _requestState = MutableLiveData<RequestState>()
     val requestState: LiveData<RequestState> = _requestState
 
