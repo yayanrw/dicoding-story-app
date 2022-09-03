@@ -16,7 +16,7 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
     name = SETTING_PREFERENCES_NAME
 )
 
-class UserPreference (private val dataStore: DataStore<Preferences>) {
+class UserPreference(private val dataStore: DataStore<Preferences>) {
     fun getUser(): Flow<User> {
         return dataStore.data.map { preferences ->
             User(
@@ -37,33 +37,19 @@ class UserPreference (private val dataStore: DataStore<Preferences>) {
         }
     }
 
-    suspend fun login() {
-        dataStore.edit { preferences ->
-            preferences[STATE_KEY] = true
-        }
-    }
-
     suspend fun logout() {
         dataStore.edit { preferences ->
+            preferences[USERID_KEY] = ""
+            preferences[NAME_KEY] = ""
+            preferences[TOKEN_KEY] = ""
             preferences[STATE_KEY] = false
         }
     }
 
     companion object {
-        @Volatile
-        private var INSTANCE: UserPreference? = null
-
         private val USERID_KEY = stringPreferencesKey("userID")
         private val NAME_KEY = stringPreferencesKey("name")
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val STATE_KEY = booleanPreferencesKey("state")
-
-        fun getInstance(dataStore: DataStore<Preferences>): UserPreference {
-            return INSTANCE ?: synchronized(this) {
-                val instance = UserPreference(dataStore)
-                INSTANCE = instance
-                instance
-            }
-        }
     }
 }
