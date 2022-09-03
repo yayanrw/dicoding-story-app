@@ -65,7 +65,7 @@ class StoryAddActivity : AppCompatActivity() {
             if (!allPermissionsGranted()) {
                 Toast.makeText(
                     this,
-                    "Tidak mendapatkan permission.",
+                    getString(R.string.failed_get_persmission),
                     Toast.LENGTH_SHORT
                 ).show()
                 finish()
@@ -113,7 +113,7 @@ class StoryAddActivity : AppCompatActivity() {
         val intent = Intent()
         intent.action = ACTION_GET_CONTENT
         intent.type = "image/*"
-        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        val chooser = Intent.createChooser(intent, getString(R.string.choose_picture))
         launcherIntentGallery.launch(chooser)
     }
 
@@ -147,17 +147,25 @@ class StoryAddActivity : AppCompatActivity() {
                             .show()
                     }
                 } catch (e: HttpException) {
-                    Toast.makeText(this@StoryAddActivity, getString(R.string.oops), Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        this@StoryAddActivity,
+                        getString(R.string.oops),
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 } catch (e: IOException) {
-                    Toast.makeText(this@StoryAddActivity, getString(R.string.no_connection), Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        this@StoryAddActivity,
+                        getString(R.string.no_connection),
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
             }
         } else {
             Toast.makeText(
                 this,
-                "Silakan masukkan berkas gambar terlebih dahulu.",
+                getString(R.string.choose_image_warn),
                 Toast.LENGTH_SHORT
             ).show()
         }

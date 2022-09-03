@@ -26,4 +26,9 @@
     <string name="invalid_credentials">Your email or password is invalid</string>
     <string name="email_taken">This email already taken</string>
     <string name="success_register">Register successfully, please login to continue</string>
+    <string name="failed_open_camera">Gagal memunculkan kamera.</string>
+    <string name="failed_take_photo">Gagal mengambil gambar.</string>
+    <string name="failed_get_persmission">Tidak mendapatkan permission</string>
+    <string name="choose_picture">Choose a Picture</string>
+    <string name="choose_image_warn">Please choose image file firstly</string>
 </resources>
