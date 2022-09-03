@@ -15,8 +15,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.heyproject.storyapp.R
 import com.heyproject.storyapp.databinding.ActivityStoryAddBinding
+import com.heyproject.storyapp.model.UserPreference
 import com.heyproject.storyapp.network.StoryApi
-import com.heyproject.storyapp.util.UserPreference
 import com.heyproject.storyapp.util.reduceFileImage
 import com.heyproject.storyapp.util.rotateBitmap
 import com.heyproject.storyapp.util.uriToFile
@@ -33,14 +33,13 @@ import java.io.IOException
 class StoryAddActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoryAddBinding
     private var getFile: File? = null
-    private lateinit var userPreference: UserPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStoryAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userPreference = UserPreference(this)
+//        userPreference = UserPreference(this)
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -135,7 +134,7 @@ class StoryAddActivity : AppCompatActivity() {
                     val response = StoryApi.retrofitService.insertStory(
                         photo = imageMultipart,
                         description = description,
-                        auth = "Bearer ${userPreference.getUser().token!!}"
+                        auth = "Bearer "
                     )
 
                     if (!response.error!!) {

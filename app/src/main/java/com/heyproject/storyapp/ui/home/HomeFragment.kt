@@ -10,14 +10,21 @@ import androidx.navigation.fragment.findNavController
 import com.heyproject.storyapp.R
 import com.heyproject.storyapp.adapter.StoryAdapter
 import com.heyproject.storyapp.databinding.FragmentHomeBinding
+import com.heyproject.storyapp.model.UserPreference
+import com.heyproject.storyapp.model.dataStore
 import com.heyproject.storyapp.network.response.ListStoryItem
+import com.heyproject.storyapp.ui.ViewModelFactory
 import com.heyproject.storyapp.util.RequestState
-import com.heyproject.storyapp.util.UserPreference
+
 
 class HomeFragment : Fragment() {
-    private lateinit var userPreference: UserPreference
     private var binding: FragmentHomeBinding? = null
-    private val viewModel: HomeViewModel by viewModels()
+    private lateinit var userPreference: UserPreference
+    private val viewModel: HomeViewModel by viewModels() {
+        ViewModelFactory(
+            userPreference
+        )
+    }
     private lateinit var storyAdapter: StoryAdapter
 
     override fun onCreateView(
@@ -31,7 +38,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userPreference = UserPreference(requireContext())
+        userPreference = UserPreference(requireContext().dataStore)
 
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -102,7 +109,7 @@ class HomeFragment : Fragment() {
     }
 
     fun fetchStories() {
-        viewModel.getStoryList(userPreference.getUser().token!!)
+//        viewModel.getStoryList(userPreference.getUser().token!!)
     }
 
     fun goToStoryAddScreen() {

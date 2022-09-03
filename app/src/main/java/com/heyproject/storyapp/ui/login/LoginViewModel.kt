@@ -1,11 +1,7 @@
 package com.heyproject.storyapp.ui.login
 
-import android.content.Context
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.heyproject.storyapp.model.User
 import com.heyproject.storyapp.model.UserPreference
 import com.heyproject.storyapp.network.StoryApi
 import com.heyproject.storyapp.network.response.LoginResult
@@ -18,9 +14,6 @@ class LoginViewModel(private val pref: UserPreference) : ViewModel() {
     private val _requestState = MutableLiveData<RequestState>()
     val requestState: LiveData<RequestState> = _requestState
 
-    private val _loginResult = MutableLiveData<LoginResult>()
-    val loginResult: LiveData<LoginResult> = _loginResult
-
     fun signIn(
         email: String,
         password: String
@@ -31,7 +24,7 @@ class LoginViewModel(private val pref: UserPreference) : ViewModel() {
                 val response = StoryApi.retrofitService.postLogin(email, password)
                 if (!response.error!!) {
                     _requestState.value = RequestState.SUCCESS
-                    _loginResult.value = response.loginResult!!
+                    pref.saveUser(LoginResult().toLoginUser(response.loginResult!!))
                 } else {
                     _requestState.value = RequestState.ERROR
                 }
@@ -46,5 +39,9 @@ class LoginViewModel(private val pref: UserPreference) : ViewModel() {
                 _requestState.value = RequestState.NO_CONNECTION
             }
         }
+    }
+
+    fun getUser(): LiveData<User> {
+        return pref.getUser().asLiveData()
     }
 }

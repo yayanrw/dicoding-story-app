@@ -12,15 +12,18 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
 import com.heyproject.storyapp.databinding.FragmentLoginBinding
-import com.heyproject.storyapp.model.User
+import com.heyproject.storyapp.model.UserPreference
+import com.heyproject.storyapp.model.dataStore
+import com.heyproject.storyapp.ui.ViewModelFactory
 import com.heyproject.storyapp.util.RequestState
-import com.heyproject.storyapp.util.UserPreference
 
 class LoginFragment : Fragment() {
 
     private var binding: FragmentLoginBinding? = null
-    private val viewModel: LoginViewModel by viewModels()
     private lateinit var userPreference: UserPreference
+    private val viewModel: LoginViewModel by viewModels() {
+        ViewModelFactory(userPreference)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,16 +36,20 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        removeActionBar(true)
+        userPreference = UserPreference(requireContext().dataStore)
+
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = viewModel
             loginFragment = this@LoginFragment
         }
 
-        removeActionBar(true)
-
-        userPreference = UserPreference(requireContext())
-        isLoggedIn()
+        viewModel.getUser().observe(viewLifecycleOwner) {
+            if (it.isLogin) {
+                findNavController().navigate(R.id.action_loginFragment_to_homeActivity)
+            }
+        }
 
         viewModel.requestState.observe(viewLifecycleOwner) {
             when (it) {
@@ -70,17 +77,6 @@ class LoginFragment : Fragment() {
                     setLoading(false)
                 }
             }
-        }
-
-        viewModel.loginResult.observe(viewLifecycleOwner) {
-            val user = User()
-            user.apply {
-                userId = it.userId
-                name = it.name
-                token = it.token
-            }
-            userPreference.setUser(user)
-            isLoggedIn()
         }
     }
 
@@ -145,9 +141,9 @@ class LoginFragment : Fragment() {
     }
 
     private fun isLoggedIn() {
-        val user: User = userPreference.getUser()
-        if (!user.token.isNullOrEmpty()) {
-            findNavController().navigate(R.id.action_loginFragment_to_homeActivity)
-        }
+//        val user: User = userPreference.getUser()
+//        if (!user.token.isNullOrEmpty()) {
+//            findNavController().navigate(R.id.action_loginFragment_to_homeActivity)
+//        }
     }
 }

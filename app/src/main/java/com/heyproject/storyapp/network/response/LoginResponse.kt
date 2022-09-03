@@ -1,5 +1,6 @@
 package com.heyproject.storyapp.network.response
 
+import com.heyproject.storyapp.model.User
 import com.squareup.moshi.Json
 
 data class LoginResponse(
@@ -24,4 +25,13 @@ data class LoginResult(
 
     @Json(name = "token")
     val token: String? = null
-)
+) {
+    fun toLoginUser(loginResult: LoginResult): User {
+        return User(
+            userId = loginResult.userId!!,
+            name = loginResult.name!!,
+            token = loginResult.token!!,
+            isLogin = true
+        )
+    }
+}
