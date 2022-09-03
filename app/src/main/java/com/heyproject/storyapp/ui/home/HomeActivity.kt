@@ -1,6 +1,8 @@
 package com.heyproject.storyapp.ui.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -42,6 +44,10 @@ class HomeActivity : AppCompatActivity() {
             R.id.action_logout -> {
                 userPreference.removeSharedPref()
                 navController.navigate(R.id.action_homeFragment_to_mainActivity)
+                true
+            }
+            R.id.action_setting -> {
+                startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
                 true
             }
             else -> {
