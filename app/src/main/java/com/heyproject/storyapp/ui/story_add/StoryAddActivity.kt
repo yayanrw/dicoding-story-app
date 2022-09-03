@@ -7,31 +7,30 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
 import com.heyproject.storyapp.databinding.ActivityStoryAddBinding
 import com.heyproject.storyapp.model.UserPreference
-import com.heyproject.storyapp.network.StoryApi
-import com.heyproject.storyapp.util.reduceFileImage
+import com.heyproject.storyapp.model.dataStore
+import com.heyproject.storyapp.ui.ViewModelFactory
+import com.heyproject.storyapp.util.RequestState
 import com.heyproject.storyapp.util.rotateBitmap
 import com.heyproject.storyapp.util.uriToFile
-import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.HttpException
 import java.io.File
-import java.io.IOException
 
 class StoryAddActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoryAddBinding
+    private lateinit var userPreference: UserPreference
+    private val viewModel: StoryAddViewModel by viewModels() {
+        ViewModelFactory(userPreference)
+    }
     private var getFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +38,7 @@ class StoryAddActivity : AppCompatActivity() {
         binding = ActivityStoryAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        userPreference = UserPreference(this)
+        userPreference = UserPreference(dataStore)
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -51,6 +50,44 @@ class StoryAddActivity : AppCompatActivity() {
 
         binding.apply {
             storyAddActivity = this@StoryAddActivity
+        }
+
+        viewModel.requestState.observe(this) {
+            if (it == RequestState.LOADING) {
+                setLoading(true)
+            } else if (it == RequestState.ERROR) {
+                setLoading(false)
+                Snackbar.make(binding.root, getString(R.string.oops), Snackbar.LENGTH_SHORT).show()
+            } else if (it == RequestState.NO_CONNECTION) {
+                setLoading(false)
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.no_connection),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            } else {
+                setLoading(false)
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.upload_success),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                finish()
+            }
+        }
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.linearProgressIndication.visibility = View.VISIBLE
+            binding.buttonAdd.isEnabled = false
+            binding.btnCamera.isEnabled = false
+            binding.btnGallery.isEnabled = false
+        } else {
+            binding.linearProgressIndication.visibility = View.GONE
+            binding.buttonAdd.isEnabled = true
+            binding.btnCamera.isEnabled = true
+            binding.btnGallery.isEnabled = true
         }
     }
 
@@ -117,57 +154,29 @@ class StoryAddActivity : AppCompatActivity() {
     }
 
     fun uploadImage() {
-        if (getFile != null) {
-            val file = reduceFileImage(getFile as File)
+        if (formValidation()) {
+            viewModel.uploadImage(getFile!!, binding.edAddDescription.text.toString())
+        }
+    }
 
-            val description =
-                binding.edAddDescription.text.toString().toRequestBody("text/plain".toMediaType())
-            val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-                "photo",
-                file.name,
-                requestImageFile
-            )
-
-            lifecycleScope.launch {
-                try {
-                    val response = StoryApi.retrofitService.insertStory(
-                        photo = imageMultipart,
-                        description = description,
-                        auth = "Bearer "
-                    )
-
-                    if (!response.error!!) {
-                        Toast.makeText(this@StoryAddActivity, response.message, Toast.LENGTH_SHORT)
-                            .show()
-                        finish()
-                    } else {
-                        Toast.makeText(this@StoryAddActivity, response.message, Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                } catch (e: HttpException) {
-                    Toast.makeText(
-                        this@StoryAddActivity,
-                        getString(R.string.oops),
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                } catch (e: IOException) {
-                    Toast.makeText(
-                        this@StoryAddActivity,
-                        getString(R.string.no_connection),
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
-            }
+    private fun formValidation(): Boolean {
+        var isValid = true
+        if (binding.edAddDescription.text.isNullOrEmpty()) {
+            isValid = false
+            binding.edAddDescription.error = getString(R.string.required)
         } else {
+            binding.edAddDescription.error = null
+        }
+
+        if (getFile == null) {
+            isValid = false
             Toast.makeText(
                 this,
                 getString(R.string.choose_image_warn),
                 Toast.LENGTH_SHORT
             ).show()
         }
+        return isValid
     }
 
     companion object {
