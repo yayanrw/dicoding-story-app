@@ -32,4 +32,5 @@
     <string name="failed_get_persmission">Gagal mendapatkan izin</string>
     <string name="choose_picture">Pilih gambar</string>
     <string name="choose_image_warn">Silakan pilih file gambar terlebih dahulu</string>
+    <string name="setting">Pengaturan</string>
 </resources>
