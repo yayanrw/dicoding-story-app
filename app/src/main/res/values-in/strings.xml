@@ -27,9 +27,9 @@
     <string name="invalid_credentials">Email atau kata sandi Anda tidak valid</string>
     <string name="email_taken">Email ini sudah ada</string>
     <string name="success_register">Daftar berhasil, silakan masuk untuk melanjutkan</string>
-    <string name="failed_open_camera">Gagal memunculkan kamera.</string>
-    <string name="failed_take_photo">Gagal mengambil gambar.</string>
-    <string name="failed_get_persmission">Tidak mendapatkan permission</string>
-    <string name="choose_picture">Choose a Picture</string>
-    <string name="choose_image_warn">Please choose image file firstly</string>
+    <string name="failed_open_camera">Gagal memunculkan kamera</string>
+    <string name="failed_take_photo">Gagal mengambil gambar</string>
+    <string name="failed_get_persmission">Gagal mendapatkan izin</string>
+    <string name="choose_picture">Pilih gambar</string>
+    <string name="choose_image_warn">Silakan pilih file gambar terlebih dahulu</string>
 </resources>
