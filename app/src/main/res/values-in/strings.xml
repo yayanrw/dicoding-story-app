@@ -33,4 +33,6 @@
     <string name="choose_picture">Pilih gambar</string>
     <string name="choose_image_warn">Silakan pilih file gambar terlebih dahulu</string>
     <string name="setting">Pengaturan</string>
+    <string name="appwidget_text">Banner Cerita</string>
+    <string name="empty_text">Tidak ada data</string>
 </resources>

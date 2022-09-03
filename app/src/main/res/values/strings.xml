@@ -32,4 +32,6 @@
     <string name="choose_picture">Choose a picture</string>
     <string name="choose_image_warn">Please choose image file firstly</string>
     <string name="setting">Setting</string>
+    <string name="appwidget_text">Stories Banner</string>
+    <string name="empty_text">No Data</string>
 </resources>

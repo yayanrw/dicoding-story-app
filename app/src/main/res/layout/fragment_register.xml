@@ -76,7 +76,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/register_name"
                 app:startIconDrawable="@drawable/ic_baseline_email_24">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.heyproject.storyapp.customview.EmailEditText
                     android:id="@+id/ed_register_email"
                     style="@style/TextInputEditText"
                     android:inputType="textEmailAddress" />
