@@ -1,5 +1,7 @@
 package com.heyproject.storyapp.ui.login
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -78,6 +80,8 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+
+        playAnimation()
     }
 
     private fun setLoading(isLoading: Boolean) {
@@ -138,5 +142,18 @@ class LoginFragment : Fragment() {
             binding?.loginPassword?.error = null
         }
         return isValid
+    }
+
+    private fun playAnimation() {
+        val appName = ObjectAnimator.ofFloat(binding?.tvAppName, View.ALPHA, 1f).setDuration(300)
+        val loginEmail = ObjectAnimator.ofFloat(binding?.loginEmail, View.ALPHA, 1f).setDuration(300)
+        val loginPassword = ObjectAnimator.ofFloat(binding?.loginPassword, View.ALPHA, 1f).setDuration(300)
+        val btnSignIn = ObjectAnimator.ofFloat(binding?.btnSignIn, View.ALPHA, 1f).setDuration(300)
+        val lnrNotRegistered = ObjectAnimator.ofFloat(binding?.lnrNotRegistered, View.ALPHA, 1f).setDuration(300)
+
+        AnimatorSet().apply {
+            playSequentially(appName, loginEmail, loginPassword, btnSignIn, lnrNotRegistered)
+            start()
+        }
     }
 }

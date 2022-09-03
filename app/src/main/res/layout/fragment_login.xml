@@ -42,7 +42,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:alpha="0" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/login_email"
@@ -54,7 +55,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_app_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_app_name"
-                app:startIconDrawable="@drawable/ic_baseline_email_24">
+                app:startIconDrawable="@drawable/ic_baseline_email_24"
+                android:alpha="0">
 
                 <com.heyproject.storyapp.customview.EmailEditText
                     android:id="@+id/ed_login_email"
@@ -74,7 +76,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/login_email"
                 app:layout_constraintTop_toBottomOf="@+id/login_email"
-                app:startIconDrawable="@drawable/ic_baseline_lock_24">
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                android:alpha="0">
 
                 <com.heyproject.storyapp.customview.PasswordEditText
                     android:id="@+id/ed_login_password"
@@ -94,7 +97,8 @@
                 android:text="@string/sign_in"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/login_password" />
+                app:layout_constraintTop_toBottomOf="@+id/login_password"
+                android:alpha="0" />
 
             <LinearLayout
                 android:id="@+id/lnr_not_registered"
@@ -104,7 +108,8 @@
                 android:orientation="horizontal"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintStart_toStartOf="@+id/btn_sign_in"
-                app:layout_constraintTop_toBottomOf="@+id/btn_sign_in">
+                app:layout_constraintTop_toBottomOf="@+id/btn_sign_in"
+                android:alpha="0">
 
                 <TextView
                     android:id="@+id/textView2"
