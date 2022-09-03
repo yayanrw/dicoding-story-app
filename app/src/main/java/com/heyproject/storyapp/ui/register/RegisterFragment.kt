@@ -1,5 +1,7 @@
 package com.heyproject.storyapp.ui.register
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -74,6 +76,21 @@ class RegisterFragment : Fragment() {
                     findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                 }
             }
+        }
+
+        playAnimation()
+    }
+
+    private fun playAnimation() {
+        val appName = ObjectAnimator.ofFloat(binding?.tvAppName, View.ALPHA, 1f).setDuration(300)
+        val registerName = ObjectAnimator.ofFloat(binding?.registerName, View.ALPHA, 1f).setDuration(300)
+        val registerEmail = ObjectAnimator.ofFloat(binding?.registerEmail, View.ALPHA, 1f).setDuration(300)
+        val registerPassword = ObjectAnimator.ofFloat(binding?.registerPassword, View.ALPHA, 1f).setDuration(300)
+        val btnRegister = ObjectAnimator.ofFloat(binding?.btnRegister, View.ALPHA, 1f).setDuration(300)
+
+        AnimatorSet().apply {
+            playSequentially(appName, registerName, registerEmail, registerPassword, btnRegister)
+            start()
         }
     }
 
