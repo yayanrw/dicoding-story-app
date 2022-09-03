@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Story App</string>
-    <string name="email">Alamat Surel</string>
+    <string name="email">Email</string>
     <string name="password">Kata sandi</string>
     <string name="sign_in">Masuk</string>
     <string name="not_registered_yet">Belum terdaftar?</string>
@@ -24,4 +24,5 @@
     <string name="no_connection">Tidak dapat menjangkau server, periksa koneksi internet Anda.</string>
     <string name="no_data_available">Tidak ada data yang tersedia</string>
     <string name="refresh">Segarkan</string>
+    <string name="invalid_credentials">Email atau kata sandi Anda tidak valid</string>
 </resources>

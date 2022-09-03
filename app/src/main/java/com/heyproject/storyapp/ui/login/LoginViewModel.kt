@@ -1,5 +1,6 @@
 package com.heyproject.storyapp.ui.login
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,9 +19,6 @@ class LoginViewModel : ViewModel() {
     private val _requestState = MutableLiveData<RequestState>()
     val requestState: LiveData<RequestState> = _requestState
 
-    private val _message = MutableLiveData<String>()
-    val message: LiveData<String> = _message
-
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
@@ -35,23 +33,19 @@ class LoginViewModel : ViewModel() {
                 if (!response.error!!) {
                     _requestState.value = RequestState.SUCCESS
                     _loginResult.value = response.loginResult!!
-                    _message.value = response.message ?: "Login successfully"
                 } else {
                     _requestState.value = RequestState.ERROR
-                    _message.value = response.message ?: "Oops, something went wrong!"
                 }
 
             } catch (e: HttpException) {
-                _requestState.value = RequestState.ERROR
                 if (e.code() == 401) {
-                    _message.value = "Your email or password is invalid"
+                    _requestState.value = RequestState.INVALID_CREDENTIALS
                 } else {
-                    _message.value = "Oops, something went wrong!"
+                    _requestState.value = RequestState.ERROR
                 }
                 Log.e(TAG, e.toString())
             } catch (e: IOException) {
-                _requestState.value = RequestState.ERROR
-                _message.value = "Couldn't reach server, check your internet connection."
+                _requestState.value = RequestState.NO_CONNECTION
                 Log.e(TAG, e.toString())
             }
         }

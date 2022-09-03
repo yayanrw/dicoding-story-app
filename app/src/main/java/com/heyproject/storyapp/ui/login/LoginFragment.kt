@@ -44,17 +44,31 @@ class LoginFragment : Fragment() {
         userPreference = UserPreference(requireContext())
         isLoggedIn()
 
-        viewModel.message.observe(viewLifecycleOwner) {
-            Snackbar.make(view, it!!, Snackbar.LENGTH_SHORT).show()
-        }
-
         viewModel.requestState.observe(viewLifecycleOwner) {
-            if (it == RequestState.LOADING) {
-                binding?.linearProgressIndicator?.visibility = View.VISIBLE
-                binding?.btnSignIn?.isEnabled = false
-            } else {
-                binding?.linearProgressIndicator?.visibility = View.GONE
-                binding?.btnSignIn?.isEnabled = true
+            when (it) {
+                RequestState.LOADING -> {
+                    setLoading(true)
+                }
+                RequestState.ERROR -> {
+                    setLoading(false)
+                    Snackbar.make(view, getString(R.string.oops), Snackbar.LENGTH_SHORT).show()
+                }
+                RequestState.INVALID_CREDENTIALS -> {
+                    setLoading(false)
+                    Snackbar.make(
+                        view,
+                        getString(R.string.invalid_credentials),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                RequestState.NO_CONNECTION -> {
+                    setLoading(false)
+                    Snackbar.make(view, getString(R.string.no_connection), Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+                else -> {
+                    setLoading(false)
+                }
             }
         }
 
@@ -67,6 +81,16 @@ class LoginFragment : Fragment() {
             }
             userPreference.setUser(user)
             isLoggedIn()
+        }
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding?.linearProgressIndicator?.visibility = View.VISIBLE
+            binding?.btnSignIn?.isEnabled = false
+        } else {
+            binding?.linearProgressIndicator?.visibility = View.GONE
+            binding?.btnSignIn?.isEnabled = true
         }
     }
 
