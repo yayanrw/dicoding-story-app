@@ -1,6 +1,5 @@
 package com.heyproject.storyapp.ui.story_add
 
-import android.Manifest
 import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
@@ -18,6 +17,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
 import com.heyproject.storyapp.core.CAMERA_RESULT
 import com.heyproject.storyapp.core.IS_BACK_CAMERA_RESULT
+import com.heyproject.storyapp.core.REQUEST_CODE_PERMISSIONS
+import com.heyproject.storyapp.core.REQUIRED_PERMISSIONS
 import com.heyproject.storyapp.databinding.ActivityStoryAddBinding
 import com.heyproject.storyapp.model.UserPreference
 import com.heyproject.storyapp.model.dataStore
@@ -52,12 +53,6 @@ class StoryAddActivity : AppCompatActivity() {
 
         binding.apply {
             storyAddActivity = this@StoryAddActivity
-        }
-
-        viewModel.getUser().observe(this) {
-            if (!it.isLogin) {
-                finish()
-            }
         }
 
         viewModel.requestState.observe(this) {
@@ -195,7 +190,5 @@ class StoryAddActivity : AppCompatActivity() {
 
     companion object {
         const val CAMERA_X_RESULT = 200
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private const val REQUEST_CODE_PERMISSIONS = 10
     }
 }
