@@ -11,6 +11,8 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.heyproject.storyapp.R
+import com.heyproject.storyapp.core.CAMERA_RESULT
+import com.heyproject.storyapp.core.IS_BACK_CAMERA_RESULT
 import com.heyproject.storyapp.databinding.ActivityCameraBinding
 import com.heyproject.storyapp.util.createFile
 
@@ -81,9 +83,9 @@ class CameraActivity : AppCompatActivity() {
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val intent = Intent()
-                    intent.putExtra("picture", photoFile)
+                    intent.putExtra(CAMERA_RESULT, photoFile)
                     intent.putExtra(
-                        "isBackCamera",
+                        IS_BACK_CAMERA_RESULT,
                         cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA
                     )
                     setResult(StoryAddActivity.CAMERA_X_RESULT, intent)

@@ -7,7 +7,6 @@ import com.heyproject.storyapp.ui.home.HomeViewModel
 import com.heyproject.storyapp.ui.login.LoginViewModel
 import com.heyproject.storyapp.ui.register.RegisterViewModel
 import com.heyproject.storyapp.ui.story_add.StoryAddViewModel
-import com.heyproject.storyapp.ui.story_detail.StoryDetailViewModel
 
 class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
@@ -24,9 +23,6 @@ class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.New
             }
             modelClass.isAssignableFrom(StoryAddViewModel::class.java) -> {
                 StoryAddViewModel(pref) as T
-            }
-            modelClass.isAssignableFrom(StoryDetailViewModel::class.java) -> {
-                StoryDetailViewModel(pref) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

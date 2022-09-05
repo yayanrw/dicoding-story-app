@@ -16,6 +16,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
+import com.heyproject.storyapp.core.CAMERA_RESULT
+import com.heyproject.storyapp.core.IS_BACK_CAMERA_RESULT
 import com.heyproject.storyapp.databinding.ActivityStoryAddBinding
 import com.heyproject.storyapp.model.UserPreference
 import com.heyproject.storyapp.model.dataStore
@@ -65,7 +67,8 @@ class StoryAddActivity : AppCompatActivity() {
                 }
                 RequestState.ERROR -> {
                     setLoading(false)
-                    Snackbar.make(binding.root, getString(R.string.oops), Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, getString(R.string.oops), Snackbar.LENGTH_SHORT)
+                        .show()
                 }
                 RequestState.NO_CONNECTION -> {
                     setLoading(false)
@@ -133,8 +136,8 @@ class StoryAddActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) {
         if (it.resultCode == CAMERA_X_RESULT) {
-            val myFile = it.data?.getSerializableExtra("picture") as File
-            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
+            val myFile = it.data?.getSerializableExtra(CAMERA_RESULT) as File
+            val isBackCamera = it.data?.getBooleanExtra(IS_BACK_CAMERA_RESULT, true) as Boolean
             getFile = myFile
             val result = rotateBitmap(
                 BitmapFactory.decodeFile(getFile?.path),

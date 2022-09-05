@@ -8,7 +8,6 @@ import com.heyproject.storyapp.util.RequestState
 import com.heyproject.storyapp.util.reduceFileImage
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -23,11 +22,9 @@ class StoryAddViewModel(private val pref: UserPreference) : ViewModel() {
     val requestState: LiveData<RequestState> = _requestState
 
     fun uploadImage(getFile: File, description: String) {
-        val token = runBlocking {
-            pref.getUser().first().token
-        }
         viewModelScope.launch {
             try {
+                val token = pref.getUser().first().token
                 _requestState.value = RequestState.LOADING
                 val file = reduceFileImage(getFile)
                 val descRequestBody = description.toRequestBody("text/plain".toMediaType())

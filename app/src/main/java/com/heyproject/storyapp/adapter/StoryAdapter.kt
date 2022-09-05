@@ -16,9 +16,11 @@ class StoryAdapter(private val stories: List<ListStoryItem>?) :
 
     class StoryViewHolder(var binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(listStoryItem: ListStoryItem?) {
-            binding.tvItemName.text = listStoryItem?.name
-            binding.story = listStoryItem
-            binding.executePendingBindings()
+            binding.apply {
+                tvItemName.text = listStoryItem?.name
+                story = listStoryItem
+                executePendingBindings()
+            }
         }
     }
 
