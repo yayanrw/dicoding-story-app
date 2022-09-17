@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-data class ListStoryDto(
+data class StoryDto(
 
     @Json(name = "photoUrl")
     val photoUrl: String? = null,
