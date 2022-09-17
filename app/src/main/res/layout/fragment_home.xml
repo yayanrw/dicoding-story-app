@@ -2,17 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".presentation.home.HomeFragment">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.heyproject.storyapp.ui.home.HomeViewModel" />
+            type="com.heyproject.storyapp.presentation.home.HomeViewModel" />
 
         <variable
             name="homeFragment"
-            type="com.heyproject.storyapp.ui.home.HomeFragment" />
+            type="com.heyproject.storyapp.presentation.home.HomeFragment" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

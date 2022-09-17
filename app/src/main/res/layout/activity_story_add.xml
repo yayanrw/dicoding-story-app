@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.story_add.StoryAddActivity">
+    tools:context=".presentation.story_add.StoryAddActivity">
 
     <data>
 
         <variable
             name="storyAddActivity"
-            type="com.heyproject.storyapp.ui.story_add.StoryAddActivity" />
+            type="com.heyproject.storyapp.presentation.story_add.StoryAddActivity" />
     </data>
 
     <ScrollView

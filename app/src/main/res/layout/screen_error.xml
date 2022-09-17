@@ -7,7 +7,7 @@
 
         <variable
             name="homeFragment"
-            type="com.heyproject.storyapp.ui.home.HomeFragment" />
+            type="com.heyproject.storyapp.presentation.home.HomeFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

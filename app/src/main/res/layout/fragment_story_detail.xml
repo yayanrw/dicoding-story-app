@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_constraintHorizontal_bias="0.0"
-    tools:context=".ui.story_detail.StoryDetailFragment">
+    tools:context=".presentation.story_detail.StoryDetailFragment">
 
     <data>
 
         <variable
             name="story"
-            type="com.heyproject.storyapp.network.response.ListStoryItem" />
+            type="com.heyproject.storyapp.data.network.response.ListStoryItem" />
     </data>
 
     <ScrollView

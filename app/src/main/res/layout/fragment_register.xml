@@ -2,17 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.register.RegisterFragment">
+    tools:context=".presentation.register.RegisterFragment">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.heyproject.storyapp.ui.register.RegisterViewModel" />
+            type="com.heyproject.storyapp.presentation.register.RegisterViewModel" />
 
         <variable
             name="registerFragment"
-            type="com.heyproject.storyapp.ui.register.RegisterFragment" />
+            type="com.heyproject.storyapp.presentation.register.RegisterFragment" />
     </data>
 
     <ScrollView
@@ -22,7 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ui.register.RegisterFragment">
+            tools:context=".presentation.register.RegisterFragment">
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/linear_progress_indicator"
@@ -79,7 +79,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_email_24"
                 android:alpha="0">
 
-                <com.heyproject.storyapp.customview.EmailEditText
+                <com.heyproject.storyapp.presentation.customview.EmailEditText
                     android:id="@+id/ed_register_email"
                     style="@style/TextInputEditText"
                     android:inputType="textEmailAddress" />
@@ -100,7 +100,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_lock_24"
                 android:alpha="0">
 
-                <com.heyproject.storyapp.customview.PasswordEditText
+                <com.heyproject.storyapp.presentation.customview.PasswordEditText
                     android:id="@+id/ed_register_password"
                     style="@style/TextInputEditText"
                     android:inputType="textPassword" />

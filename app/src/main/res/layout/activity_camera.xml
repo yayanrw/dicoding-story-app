@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.story_add.CameraActivity">
+    tools:context=".presentation.story_add.CameraActivity">
 
     <data>
 
         <variable
             name="cameraActivity"
-            type="com.heyproject.storyapp.ui.story_add.CameraActivity" />
+            type="com.heyproject.storyapp.presentation.story_add.CameraActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

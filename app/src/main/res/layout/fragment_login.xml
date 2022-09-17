@@ -2,17 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.login.LoginFragment">
+    tools:context=".presentation.login.LoginFragment">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.heyproject.storyapp.ui.login.LoginViewModel" />
+            type="com.heyproject.storyapp.presentation.login.LoginViewModel" />
 
         <variable
             name="loginFragment"
-            type="com.heyproject.storyapp.ui.login.LoginFragment" />
+            type="com.heyproject.storyapp.presentation.login.LoginFragment" />
     </data>
 
     <ScrollView
@@ -58,7 +58,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_email_24"
                 android:alpha="0">
 
-                <com.heyproject.storyapp.customview.EmailEditText
+                <com.heyproject.storyapp.presentation.customview.EmailEditText
                     android:id="@+id/ed_login_email"
                     style="@style/TextInputEditText"
                     android:inputType="textEmailAddress" />
@@ -79,7 +79,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_lock_24"
                 android:alpha="0">
 
-                <com.heyproject.storyapp.customview.PasswordEditText
+                <com.heyproject.storyapp.presentation.customview.PasswordEditText
                     android:id="@+id/ed_login_password"
                     style="@style/TextInputEditText"
                     android:inputType="textPassword" />
