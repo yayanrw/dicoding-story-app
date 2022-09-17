@@ -16,6 +16,7 @@ buildscript {
         camerax_version = "1.1.0-beta02"
         datastore_version = "1.0.0"
         paging_version = "3.1.1"
+        room_version = "2.4.3"
     }
     repositories {
         google()
