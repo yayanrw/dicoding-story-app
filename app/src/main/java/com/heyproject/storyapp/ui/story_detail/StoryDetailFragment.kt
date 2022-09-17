@@ -10,7 +10,6 @@ import androidx.navigation.fragment.navArgs
 import com.heyproject.storyapp.databinding.FragmentStoryDetailBinding
 import com.heyproject.storyapp.model.UserPreference
 import com.heyproject.storyapp.model.dataStore
-import com.heyproject.storyapp.network.response.ListStoryItem
 
 class StoryDetailFragment : Fragment() {
     private var binding: FragmentStoryDetailBinding? = null
@@ -31,13 +30,8 @@ class StoryDetailFragment : Fragment() {
         removeActionBar()
         userPreference = UserPreference(requireContext().dataStore)
 
-        val storyItem = ListStoryItem(
-            name = args.name,
-            description = args.description,
-            photoUrl = args.photoUrl
-        )
         binding?.apply {
-            story = storyItem
+            story = args.storyItem
             executePendingBindings()
         }
     }
