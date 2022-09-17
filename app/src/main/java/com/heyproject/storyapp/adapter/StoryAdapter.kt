@@ -2,24 +2,29 @@ package com.heyproject.storyapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.heyproject.storyapp.databinding.ItemStoryBinding
 import com.heyproject.storyapp.network.response.ListStoryItem
 
-class StoryAdapter(private val stories: List<ListStoryItem>?) :
-    RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
-    private lateinit var onItemClickCallback: OnItemClickCallback
+class StoryAdapter :
+    ListAdapter<ListStoryItem, StoryAdapter.StoryViewHolder>(DiffCallback) {
+    var onItemClick: ((ListStoryItem) -> Unit)? = null
 
-    fun setOnItemClickCallBack(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
-
-    class StoryViewHolder(var binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class StoryViewHolder(var binding: ItemStoryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(listStoryItem: ListStoryItem?) {
             binding.apply {
                 tvItemName.text = listStoryItem?.name
                 story = listStoryItem
                 executePendingBindings()
+            }
+        }
+
+        init {
+            binding.root.setOnClickListener {
+                onItemClick?.invoke(getItem(adapterPosition))
             }
         }
     }
@@ -30,14 +35,19 @@ class StoryAdapter(private val stories: List<ListStoryItem>?) :
     }
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
-        val story = stories?.get(position)
+        val story = getItem(position)
         holder.bind(story)
-        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(story!!) }
     }
 
-    override fun getItemCount(): Int = stories?.size ?: 0
+    companion object DiffCallback : DiffUtil.ItemCallback<ListStoryItem>() {
+        override fun areItemsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
+            return oldItem.id == newItem.id
+        }
 
-    interface OnItemClickCallback {
-        fun onItemClicked(storyItem: ListStoryItem)
+        override fun areContentsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
+            return oldItem.name == newItem.name && oldItem.description == newItem.description
+        }
+
     }
+
 }
