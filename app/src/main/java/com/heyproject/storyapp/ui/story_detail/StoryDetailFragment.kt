@@ -12,7 +12,8 @@ import com.heyproject.storyapp.model.UserPreference
 import com.heyproject.storyapp.model.dataStore
 
 class StoryDetailFragment : Fragment() {
-    private var binding: FragmentStoryDetailBinding? = null
+    private var _binding: FragmentStoryDetailBinding? = null
+    val binding = _binding!!
     private lateinit var userPreference: UserPreference
     private val args: StoryDetailFragmentArgs by navArgs()
 
@@ -20,9 +21,8 @@ class StoryDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val fragmentBinding = FragmentStoryDetailBinding.inflate(inflater, container, false)
-        binding = fragmentBinding
-        return fragmentBinding.root
+        _binding = FragmentStoryDetailBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class StoryDetailFragment : Fragment() {
         removeActionBar()
         userPreference = UserPreference(requireContext().dataStore)
 
-        binding?.apply {
+        binding.apply {
             story = args.storyItem
             executePendingBindings()
         }
@@ -42,6 +42,7 @@ class StoryDetailFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
+        _binding?.unbind()
     }
 }

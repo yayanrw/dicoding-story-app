@@ -13,13 +13,13 @@ import com.heyproject.storyapp.adapter.StoryAdapter
 import com.heyproject.storyapp.databinding.FragmentHomeBinding
 import com.heyproject.storyapp.model.UserPreference
 import com.heyproject.storyapp.model.dataStore
-import com.heyproject.storyapp.network.response.ListStoryItem
 import com.heyproject.storyapp.ui.ViewModelFactory
 import com.heyproject.storyapp.util.RequestState
 
 
 class HomeFragment : Fragment() {
-    private var binding: FragmentHomeBinding? = null
+    private var _binding: FragmentHomeBinding? = null
+    val binding get() = _binding!!
     private lateinit var userPreference: UserPreference
     private val viewModel: HomeViewModel by viewModels {
         ViewModelFactory(
@@ -32,9 +32,8 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val fragmentBinding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding = fragmentBinding
-        return fragmentBinding.root
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,13 +41,22 @@ class HomeFragment : Fragment() {
         showActionBar()
         userPreference = UserPreference(requireContext().dataStore)
 
-        binding?.apply {
+        storyAdapter = StoryAdapter()
+        storyAdapter.onItemClick = { selectedStory ->
+            val toStoryDetailFragment =
+                HomeFragmentDirections.actionHomeFragmentToStoryDetailFragment(selectedStory)
+            findNavController().navigate(toStoryDetailFragment)
+        }
+
+        binding.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = viewModel
             homeFragment = this@HomeFragment
-            rvStory.adapter = StoryAdapter(listOf())
-            rvStory.setHasFixedSize(true)
             screenError.homeFragment = this@HomeFragment
+            rvStory.apply {
+                setHasFixedSize(true)
+                adapter = storyAdapter
+            }
         }
 
         fetchStories()
@@ -60,52 +68,38 @@ class HomeFragment : Fragment() {
         }
 
         viewModel.stories.observe(viewLifecycleOwner) {
-            storyAdapter = StoryAdapter(listOf())
-            storyAdapter = StoryAdapter(it)
-            binding?.rvStory?.adapter = storyAdapter
-
-            storyAdapter.setOnItemClickCallBack(object : StoryAdapter.OnItemClickCallback {
-                override fun onItemClicked(storyItem: ListStoryItem) {
-                    val toStoryDetailFragment =
-                        HomeFragmentDirections.actionHomeFragmentToStoryDetailFragment(
-                            storyItem.name!!,
-                            storyItem.description!!,
-                            storyItem.photoUrl!!
-                        )
-                    findNavController().navigate(toStoryDetailFragment)
-                }
-            })
+            storyAdapter.submitList(it)
         }
 
         viewModel.requestState.observe(viewLifecycleOwner) {
             when (it) {
                 RequestState.LOADING -> {
-                    binding?.circularProgressIndicator?.visibility = View.VISIBLE
-                    binding?.rvStory?.visibility = View.GONE
-                    binding?.screenError?.root?.visibility = View.GONE
+                    binding.circularProgressIndicator.visibility = View.VISIBLE
+                    binding.rvStory.visibility = View.GONE
+                    binding.screenError.root.visibility = View.GONE
                 }
                 RequestState.NO_DATA -> {
-                    binding?.circularProgressIndicator?.visibility = View.GONE
-                    binding?.rvStory?.visibility = View.GONE
-                    binding?.screenError?.root?.visibility = View.VISIBLE
-                    binding?.screenError?.tvError?.text = getString(R.string.no_data_available)
+                    binding.circularProgressIndicator.visibility = View.GONE
+                    binding.rvStory.visibility = View.GONE
+                    binding.screenError.root.visibility = View.VISIBLE
+                    binding.screenError.tvError.text = getString(R.string.no_data_available)
                 }
                 RequestState.ERROR -> {
-                    binding?.circularProgressIndicator?.visibility = View.GONE
-                    binding?.rvStory?.visibility = View.GONE
-                    binding?.screenError?.root?.visibility = View.VISIBLE
-                    binding?.screenError?.tvError?.text = getString(R.string.oops)
+                    binding.circularProgressIndicator.visibility = View.GONE
+                    binding.rvStory.visibility = View.GONE
+                    binding.screenError.root.visibility = View.VISIBLE
+                    binding.screenError.tvError.text = getString(R.string.oops)
                 }
                 RequestState.NO_CONNECTION -> {
-                    binding?.circularProgressIndicator?.visibility = View.GONE
-                    binding?.rvStory?.visibility = View.GONE
-                    binding?.screenError?.root?.visibility = View.VISIBLE
-                    binding?.screenError?.tvError?.text = getString(R.string.no_connection)
+                    binding.circularProgressIndicator.visibility = View.GONE
+                    binding.rvStory.visibility = View.GONE
+                    binding.screenError.root.visibility = View.VISIBLE
+                    binding.screenError.tvError.text = getString(R.string.no_connection)
                 }
                 else -> {
-                    binding?.circularProgressIndicator?.visibility = View.GONE
-                    binding?.rvStory?.visibility = View.VISIBLE
-                    binding?.screenError?.root?.visibility = View.GONE
+                    binding.circularProgressIndicator.visibility = View.GONE
+                    binding.rvStory.visibility = View.VISIBLE
+                    binding.screenError.root.visibility = View.GONE
                 }
             }
         }
@@ -130,7 +124,7 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
-        storyAdapter = StoryAdapter(listOf())
+        _binding = null
+        _binding?.unbind()
     }
 }
