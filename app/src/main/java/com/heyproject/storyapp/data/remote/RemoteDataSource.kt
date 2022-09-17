@@ -1,10 +1,10 @@
 package com.heyproject.storyapp.data.remote
 
-import com.heyproject.storyapp.data.network.response.LoginResponse
 import com.heyproject.storyapp.data.remote.dto.LoginResultDto
 import com.heyproject.storyapp.data.remote.dto.StoryDto
 import com.heyproject.storyapp.data.remote.response.GeneralResponse
 import com.heyproject.storyapp.data.util.ApiResponse
+import com.heyproject.storyapp.domain.PostStoryParams
 import com.heyproject.storyapp.domain.StoryParams
 import com.heyproject.storyapp.domain.UserModel
 import kotlinx.coroutines.Dispatchers
@@ -61,6 +61,25 @@ class RemoteDataSource(private val storyApi: StoryApi) {
                 )
                 if (response.error == false) {
                     emit(ApiResponse.Success(response.loginResult!!))
+                } else {
+                    emit(ApiResponse.Error(response.message.toString()))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun postStory(postStoryParams: PostStoryParams): Flow<ApiResponse<GeneralResponse>> {
+        return flow {
+            try {
+                val response = storyApi.postStory(
+                    photo = postStoryParams.photo,
+                    description = postStoryParams.description,
+                    auth = postStoryParams.auth
+                )
+                if (response.error == false) {
+                    emit(ApiResponse.Success(response))
                 } else {
                     emit(ApiResponse.Error(response.message.toString()))
                 }
