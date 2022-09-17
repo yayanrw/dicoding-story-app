@@ -1,21 +1,10 @@
-package com.heyproject.storyapp.data.network.response
+package com.heyproject.storyapp.data.remote.dto
 
 import com.heyproject.storyapp.domain.User
 import com.squareup.moshi.Json
 
-data class LoginResponse(
 
-    @Json(name = "loginResult")
-    val loginResult: LoginResult? = null,
-
-    @Json(name = "error")
-    val error: Boolean? = null,
-
-    @Json(name = "message")
-    val message: String? = null
-)
-
-data class LoginResult(
+data class LoginResultDto(
 
     @Json(name = "name")
     val name: String? = null,
@@ -26,7 +15,7 @@ data class LoginResult(
     @Json(name = "token")
     val token: String? = null
 ) {
-    fun toLoginUser(loginResult: LoginResult): User {
+    fun toLoginUser(loginResult: LoginResultDto): User {
         return User(
             userId = loginResult.userId!!,
             name = loginResult.name!!,

@@ -1,23 +1,12 @@
-package com.heyproject.storyapp.data.network.response
+package com.heyproject.storyapp.data.remote.dto
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import kotlinx.parcelize.Parcelize
 
-data class StoriesResponse(
-
-    @Json(name = "listStory")
-    val listStory: List<ListStoryItem>? = null,
-
-    @Json(name = "error")
-    val error: Boolean? = null,
-
-    @Json(name = "message")
-    val message: String? = null
-)
 
 @Parcelize
-data class ListStoryItem(
+data class ListStoryDto(
 
     @Json(name = "photoUrl")
     val photoUrl: String? = null,

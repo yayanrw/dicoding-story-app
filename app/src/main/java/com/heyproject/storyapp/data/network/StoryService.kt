@@ -1,6 +1,6 @@
 package com.heyproject.storyapp.data.network
 
-import com.heyproject.storyapp.data.network.response.GeneralResponse
+import com.heyproject.storyapp.data.remote.response.GeneralResponse
 import com.heyproject.storyapp.data.network.response.LoginResponse
 import com.heyproject.storyapp.data.network.response.StoriesResponse
 import okhttp3.MultipartBody

@@ -1,4 +1,4 @@
-package com.heyproject.storyapp.data.adapter
+package com.heyproject.storyapp.data.ui
 
 import android.widget.ImageView
 import androidx.core.net.toUri
