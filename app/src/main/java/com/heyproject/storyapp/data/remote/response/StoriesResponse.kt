@@ -1,12 +1,12 @@
 package com.heyproject.storyapp.data.network.response
 
-import com.heyproject.storyapp.data.remote.dto.ListStoryDto
+import com.heyproject.storyapp.data.remote.dto.StoryDto
 import com.squareup.moshi.Json
 
 data class StoriesResponse(
 
     @Json(name = "listStory")
-    val listStory: List<ListStoryDto>? = null,
+    val listStory: List<StoryDto>? = null,
 
     @Json(name = "error")
     val error: Boolean? = null,
