@@ -11,8 +11,8 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.heyproject.storyapp.R
-import com.heyproject.storyapp.core.CAMERA_RESULT
-import com.heyproject.storyapp.core.IS_BACK_CAMERA_RESULT
+import com.heyproject.storyapp.common.CAMERA_RESULT
+import com.heyproject.storyapp.common.IS_BACK_CAMERA_RESULT
 import com.heyproject.storyapp.databinding.ActivityCameraBinding
 import com.heyproject.storyapp.data.util.createFile
 

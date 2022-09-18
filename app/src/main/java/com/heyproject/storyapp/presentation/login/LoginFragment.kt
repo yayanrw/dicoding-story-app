@@ -13,7 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
-import com.heyproject.storyapp.core.MIN_PASSWORD_LENGTH
+import com.heyproject.storyapp.common.MIN_PASSWORD_LENGTH
 import com.heyproject.storyapp.databinding.FragmentLoginBinding
 import com.heyproject.storyapp.domain.UserPreference
 import com.heyproject.storyapp.domain.dataStore

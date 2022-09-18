@@ -1,5 +1,7 @@
 package com.heyproject.storyapp.data.remote
 
+import com.heyproject.storyapp.common.Resource
+import com.heyproject.storyapp.data.remote.api.StoryApi
 import com.heyproject.storyapp.data.remote.dto.LoginResultDto
 import com.heyproject.storyapp.data.remote.dto.StoryDto
 import com.heyproject.storyapp.data.remote.response.GeneralResponse
@@ -33,7 +35,7 @@ class RemoteDataSource(private val storyApi: StoryApi) {
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun postRegister(user: UserModel): Flow<ApiResponse<GeneralResponse>> {
+    suspend fun postRegister(user: UserModel): Flow<Resource<GeneralResponse>> {
         return flow {
             try {
                 val response = storyApi.postRegister(
@@ -42,17 +44,17 @@ class RemoteDataSource(private val storyApi: StoryApi) {
                     password = user.password
                 )
                 if (response.error == false) {
-                    emit(ApiResponse.Success(response))
+                    emit(Resource.Success(response))
                 } else {
-                    emit(ApiResponse.Error(response.message.toString()))
+                    emit(Resource.Error(response.message.toString()))
                 }
             } catch (e: Exception) {
-                emit(ApiResponse.Error(e.toString()))
+                emit(Resource.Error(e.toString()))
             }
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun postLogin(user: UserModel): Flow<ApiResponse<LoginResultDto>> {
+    suspend fun postLogin(user: UserModel): Flow<Resource<LoginResultDto>> {
         return flow {
             try {
                 val response = storyApi.postLogin(
@@ -60,17 +62,17 @@ class RemoteDataSource(private val storyApi: StoryApi) {
                     password = user.password
                 )
                 if (response.error == false) {
-                    emit(ApiResponse.Success(response.loginResult!!))
+                    emit(Resource.Success(response.loginResult!!))
                 } else {
-                    emit(ApiResponse.Error(response.message.toString()))
+                    emit(Resource.Error(response.message.toString()))
                 }
             } catch (e: Exception) {
-                emit(ApiResponse.Error(e.toString()))
+                emit(Resource.Error(e.toString()))
             }
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun postStory(postStoryParams: PostStoryParams): Flow<ApiResponse<GeneralResponse>> {
+    suspend fun postStory(postStoryParams: PostStoryParams): Flow<Resource<GeneralResponse>> {
         return flow {
             try {
                 val response = storyApi.postStory(
@@ -79,12 +81,12 @@ class RemoteDataSource(private val storyApi: StoryApi) {
                     auth = postStoryParams.auth
                 )
                 if (response.error == false) {
-                    emit(ApiResponse.Success(response))
+                    emit(Resource.Success(response))
                 } else {
-                    emit(ApiResponse.Error(response.message.toString()))
+                    emit(Resource.Error(response.message.toString()))
                 }
             } catch (e: Exception) {
-                emit(ApiResponse.Error(e.toString()))
+                emit(Resource.Error(e.toString()))
             }
         }.flowOn(Dispatchers.IO)
     }
