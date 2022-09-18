@@ -1,7 +1,7 @@
 package com.heyproject.storyapp.data.remote
 
-import com.heyproject.storyapp.data.network.response.LoginResponse
-import com.heyproject.storyapp.data.network.response.StoriesResponse
+import com.heyproject.storyapp.data.remote.response.LoginResponse
+import com.heyproject.storyapp.data.remote.response.StoriesResponse
 import com.heyproject.storyapp.data.remote.response.GeneralResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
