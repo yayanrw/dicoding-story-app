@@ -1,4 +1,4 @@
-package com.heyproject.storyapp.data.remote
+package com.heyproject.storyapp.data.remote.api
 
 import com.heyproject.storyapp.data.remote.response.LoginResponse
 import com.heyproject.storyapp.data.remote.response.StoriesResponse
