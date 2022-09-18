@@ -1,5 +1,6 @@
 package com.heyproject.storyapp.data.remote.dto
 
+import com.heyproject.storyapp.data.local.entity.StoryEntity
 import com.heyproject.storyapp.domain.model.Story
 import com.squareup.moshi.Json
 
@@ -34,6 +35,18 @@ data class StoryDto(
             lon = lon,
             lat = lat,
             createdAt = createdAt
+        )
+    }
+
+    fun toStoryEntity(): StoryEntity {
+        return StoryEntity(
+            id = id,
+            name = name,
+            description = description,
+            photoUrl = photoUrl,
+            createdAt = createdAt,
+            lon = lon,
+            lat = lat
         )
     }
 }
