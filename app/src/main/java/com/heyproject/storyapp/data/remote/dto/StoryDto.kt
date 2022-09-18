@@ -1,13 +1,8 @@
 package com.heyproject.storyapp.data.remote.dto
 
-import android.os.Parcelable
 import com.squareup.moshi.Json
-import kotlinx.parcelize.Parcelize
 
-
-@Parcelize
 data class StoryDto(
-
     @Json(name = "photoUrl")
     val photoUrl: String? = null,
 
@@ -28,4 +23,4 @@ data class StoryDto(
 
     @Json(name = "lat")
     val lat: Double? = null
-) : Parcelable
+)

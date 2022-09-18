@@ -1,6 +1,6 @@
 package com.heyproject.storyapp.data.remote.dto
 
-import com.heyproject.storyapp.domain.User
+import com.heyproject.storyapp.domain.model.LoginResult
 import com.squareup.moshi.Json
 
 
@@ -15,12 +15,11 @@ data class LoginResultDto(
     @Json(name = "token")
     val token: String? = null
 ) {
-    fun toLoginUser(loginResult: LoginResultDto): User {
-        return User(
+    fun toLoginResult(loginResult: LoginResultDto): LoginResult {
+        return LoginResult(
             userId = loginResult.userId!!,
             name = loginResult.name!!,
-            token = loginResult.token!!,
-            isLogin = true
+            token = loginResult.token!!
         )
     }
 }
