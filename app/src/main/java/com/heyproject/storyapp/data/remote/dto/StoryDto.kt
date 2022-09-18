@@ -1,5 +1,6 @@
 package com.heyproject.storyapp.data.remote.dto
 
+import com.heyproject.storyapp.domain.model.Story
 import com.squareup.moshi.Json
 
 data class StoryDto(
@@ -23,4 +24,16 @@ data class StoryDto(
 
     @Json(name = "lat")
     val lat: Double? = null
-)
+) {
+    fun toStory(): Story {
+        return Story(
+            id = id,
+            name = name,
+            description = description,
+            photoUrl = photoUrl,
+            lon = lon,
+            lat = lat,
+            createdAt = createdAt
+        )
+    }
+}
