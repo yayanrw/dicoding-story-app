@@ -5,12 +5,11 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.heyproject.storyapp.data.datasource.local.entity.StoryEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StoryDao {
-    @Query("SELECT * FROM StoryEntity")
-    fun getStories(): Flow<List<StoryEntity>>
+    @Query("SELECT * FROM stories")
+    suspend fun getStories(): List<StoryEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertStory(stories: List<StoryEntity>)
