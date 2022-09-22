@@ -18,7 +18,6 @@ import com.heyproject.storyapp.databinding.FragmentLoginBinding
 import com.heyproject.storyapp.domain.UserPreference
 import com.heyproject.storyapp.domain.dataStore
 import com.heyproject.storyapp.presentation.ViewModelFactory
-import com.heyproject.storyapp.data.util.RequestState
 
 class LoginFragment : Fragment() {
 

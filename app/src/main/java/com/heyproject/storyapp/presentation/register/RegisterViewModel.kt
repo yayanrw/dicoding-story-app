@@ -4,7 +4,6 @@ import androidx.lifecycle.*
 import com.heyproject.storyapp.domain.User
 import com.heyproject.storyapp.domain.UserPreference
 import com.heyproject.storyapp.data.network.StoryApi
-import com.heyproject.storyapp.data.util.RequestState
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException

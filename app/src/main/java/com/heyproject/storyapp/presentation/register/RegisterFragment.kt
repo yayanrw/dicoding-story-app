@@ -18,7 +18,6 @@ import com.heyproject.storyapp.databinding.FragmentRegisterBinding
 import com.heyproject.storyapp.domain.UserPreference
 import com.heyproject.storyapp.domain.dataStore
 import com.heyproject.storyapp.presentation.ViewModelFactory
-import com.heyproject.storyapp.data.util.RequestState
 
 class RegisterFragment : Fragment() {
     private var binding: FragmentRegisterBinding? = null

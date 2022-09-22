@@ -19,7 +19,6 @@ import com.heyproject.storyapp.base.CAMERA_RESULT
 import com.heyproject.storyapp.base.IS_BACK_CAMERA_RESULT
 import com.heyproject.storyapp.base.REQUEST_CODE_PERMISSIONS
 import com.heyproject.storyapp.base.REQUIRED_PERMISSIONS
-import com.heyproject.storyapp.data.util.RequestState
 import com.heyproject.storyapp.data.util.rotateBitmap
 import com.heyproject.storyapp.data.util.uriToFile
 import com.heyproject.storyapp.databinding.ActivityStoryAddBinding
