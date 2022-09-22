@@ -15,10 +15,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
-import com.heyproject.storyapp.common.CAMERA_RESULT
-import com.heyproject.storyapp.common.IS_BACK_CAMERA_RESULT
-import com.heyproject.storyapp.common.REQUEST_CODE_PERMISSIONS
-import com.heyproject.storyapp.common.REQUIRED_PERMISSIONS
+import com.heyproject.storyapp.base.CAMERA_RESULT
+import com.heyproject.storyapp.base.IS_BACK_CAMERA_RESULT
+import com.heyproject.storyapp.base.REQUEST_CODE_PERMISSIONS
+import com.heyproject.storyapp.base.REQUIRED_PERMISSIONS
 import com.heyproject.storyapp.data.util.RequestState
 import com.heyproject.storyapp.data.util.rotateBitmap
 import com.heyproject.storyapp.data.util.uriToFile

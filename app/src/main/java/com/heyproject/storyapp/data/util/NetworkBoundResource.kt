@@ -1,6 +1,6 @@
 package com.heyproject.storyapp.data.util
 
-import com.heyproject.storyapp.common.Resource
+import com.heyproject.storyapp.base.Resource
 import kotlinx.coroutines.flow.*
 
 

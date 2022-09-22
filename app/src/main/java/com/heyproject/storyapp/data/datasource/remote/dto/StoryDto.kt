@@ -1,6 +1,6 @@
-package com.heyproject.storyapp.data.remote.dto
+package com.heyproject.storyapp.data.datasource.remote.dto
 
-import com.heyproject.storyapp.data.local.entity.StoryEntity
+import com.heyproject.storyapp.data.datasource.local.entity.StoryEntity
 import com.heyproject.storyapp.domain.model.Story
 import com.squareup.moshi.Json
 

@@ -1,4 +1,4 @@
-package com.heyproject.storyapp.common
+package com.heyproject.storyapp.base
 
 import android.Manifest
 

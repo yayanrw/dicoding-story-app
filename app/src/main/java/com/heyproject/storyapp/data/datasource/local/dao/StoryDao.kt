@@ -1,10 +1,10 @@
-package com.heyproject.storyapp.data.local.dao
+package com.heyproject.storyapp.data.datasource.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.heyproject.storyapp.data.local.entity.StoryEntity
+import com.heyproject.storyapp.data.datasource.local.entity.StoryEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

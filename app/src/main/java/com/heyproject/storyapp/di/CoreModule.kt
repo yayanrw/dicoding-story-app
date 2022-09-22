@@ -2,9 +2,9 @@ package com.heyproject.storyapp.di
 
 import androidx.room.Room
 import com.heyproject.storyapp.BuildConfig
-import com.heyproject.storyapp.data.local.database.StoryDatabase
-import com.heyproject.storyapp.data.remote.RemoteDataSource
-import com.heyproject.storyapp.data.remote.api.StoryApi
+import com.heyproject.storyapp.data.datasource.local.database.StoryDatabase
+import com.heyproject.storyapp.data.datasource.remote.RemoteDataSource
+import com.heyproject.storyapp.data.datasource.remote.api.StoryApi
 import com.heyproject.storyapp.data.repository.StoryRepositoryImpl
 import com.heyproject.storyapp.di.CoreModule.BASE_URL
 import com.heyproject.storyapp.di.CoreModule.DB_NAME

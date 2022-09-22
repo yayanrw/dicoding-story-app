@@ -6,7 +6,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import com.google.android.material.textfield.TextInputEditText
 import com.heyproject.storyapp.R
-import com.heyproject.storyapp.common.MIN_PASSWORD_LENGTH
+import com.heyproject.storyapp.base.MIN_PASSWORD_LENGTH
 
 class PasswordEditText : TextInputEditText {
     constructor(context: Context) : super(context) {
