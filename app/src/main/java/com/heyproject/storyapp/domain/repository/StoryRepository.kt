@@ -1,17 +1,18 @@
 package com.heyproject.storyapp.domain.repository
 
-import com.heyproject.storyapp.base.Resource
-import com.heyproject.storyapp.data.datasource.remote.dto.LoginResultDto
+import com.heyproject.storyapp.base.arch.BaseContract
+import com.heyproject.storyapp.base.wrapper.DataResource
 import com.heyproject.storyapp.data.datasource.remote.response.GeneralResponse
+import com.heyproject.storyapp.data.datasource.remote.response.LoginResponse
+import com.heyproject.storyapp.data.datasource.remote.response.StoriesResponse
 import com.heyproject.storyapp.domain.PostStoryParams
 import com.heyproject.storyapp.domain.StoryParams
 import com.heyproject.storyapp.domain.UserModel
-import com.heyproject.storyapp.domain.model.Story
 import kotlinx.coroutines.flow.Flow
 
-interface StoryRepository {
-    fun getStories(storyParams: StoryParams): Flow<Resource<List<Story>>>
-    suspend fun postRegister(user: UserModel): Flow<Resource<GeneralResponse>>
-    suspend fun postLogin(user: UserModel): Flow<Resource<LoginResultDto>>
-    suspend fun postStory(postStoryParams: PostStoryParams): Flow<Resource<GeneralResponse>>
+interface StoryRepository : BaseContract.BaseRepository {
+    suspend fun getStories(storyParams: StoryParams): Flow<DataResource<StoriesResponse>>
+    suspend fun postRegister(user: UserModel): Flow<DataResource<GeneralResponse>>
+    suspend fun postLogin(user: UserModel): Flow<DataResource<LoginResponse>>
+    suspend fun postStory(postStoryParams: PostStoryParams): Flow<DataResource<GeneralResponse>>
 }
