@@ -1,52 +1,26 @@
 package com.heyproject.storyapp.data.datasource.remote.dto
 
-import com.heyproject.storyapp.data.datasource.local.entity.StoryEntity
-import com.heyproject.storyapp.domain.model.Story
 import com.squareup.moshi.Json
 
 data class StoryDto(
     @Json(name = "photoUrl")
-    val photoUrl: String? = null,
+    val photoUrl: String?,
 
     @Json(name = "createdAt")
-    val createdAt: String? = null,
+    val createdAt: String?,
 
     @Json(name = "name")
-    val name: String? = null,
+    val name: String?,
 
     @Json(name = "description")
-    val description: String? = null,
+    val description: String?,
 
     @Json(name = "lon")
-    val lon: Double? = null,
+    val lon: Double?,
 
     @Json(name = "id")
-    val id: String? = null,
+    val id: String?,
 
     @Json(name = "lat")
-    val lat: Double? = null
-) {
-    fun toStory(): Story {
-        return Story(
-            id = id,
-            name = name,
-            description = description,
-            photoUrl = photoUrl,
-            lon = lon,
-            lat = lat,
-            createdAt = createdAt
-        )
-    }
-
-    fun toStoryEntity(): StoryEntity {
-        return StoryEntity(
-            id = id,
-            name = name,
-            description = description,
-            photoUrl = photoUrl,
-            createdAt = createdAt,
-            lon = lon,
-            lat = lat
-        )
-    }
-}
+    val lat: Double?
+)

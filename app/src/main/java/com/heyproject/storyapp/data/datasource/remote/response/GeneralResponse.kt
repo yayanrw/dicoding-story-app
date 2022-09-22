@@ -1,6 +1,5 @@
 package com.heyproject.storyapp.data.datasource.remote.response
 
-import com.heyproject.storyapp.domain.model.General
 import com.squareup.moshi.Json
 
 data class GeneralResponse(
@@ -9,8 +8,4 @@ data class GeneralResponse(
 
     @Json(name = "message")
     val message: String? = null
-) {
-    fun toGeneral(): General {
-        return General(error = error, message = message)
-    }
-}
+)
