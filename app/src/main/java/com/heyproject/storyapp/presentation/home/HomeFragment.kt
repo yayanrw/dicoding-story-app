@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.heyproject.storyapp.R
 import com.heyproject.storyapp.data.ui.StoryAdapter
 import com.heyproject.storyapp.databinding.FragmentHomeBinding
-import com.heyproject.storyapp.domain.model.UserPreference
 import com.heyproject.storyapp.domain.model.dataStore
 import com.heyproject.storyapp.presentation.ViewModelFactory
 

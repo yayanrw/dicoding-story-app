@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.heyproject.storyapp.databinding.FragmentStoryDetailBinding
-import com.heyproject.storyapp.domain.model.UserPreference
 import com.heyproject.storyapp.domain.model.dataStore
 
 class StoryDetailFragment : Fragment() {

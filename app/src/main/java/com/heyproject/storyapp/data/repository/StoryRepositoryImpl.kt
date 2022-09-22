@@ -9,7 +9,7 @@ import com.heyproject.storyapp.data.datasource.remote.response.LoginResponse
 import com.heyproject.storyapp.data.datasource.remote.response.StoriesResponse
 import com.heyproject.storyapp.domain.model.PostStoryParams
 import com.heyproject.storyapp.domain.model.StoryParams
-import com.heyproject.storyapp.domain.model.UserModel
+import com.heyproject.storyapp.domain.model.User
 import com.heyproject.storyapp.domain.repository.StoryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -23,12 +23,12 @@ class StoryRepositoryImpl(
             emit(safeNetworkCall { remoteDataSource.getStories(storyParams) })
         }
 
-    override suspend fun postRegister(user: UserModel): Flow<DataResource<GeneralResponse>> =
+    override suspend fun postRegister(user: User): Flow<DataResource<GeneralResponse>> =
         flow {
             emit(safeNetworkCall { remoteDataSource.postRegister(user) })
         }
 
-    override suspend fun postLogin(user: UserModel): Flow<DataResource<LoginResponse>> =
+    override suspend fun postLogin(user: User): Flow<DataResource<LoginResponse>> =
         flow {
             emit(safeNetworkCall { remoteDataSource.postLogin(user) })
         }

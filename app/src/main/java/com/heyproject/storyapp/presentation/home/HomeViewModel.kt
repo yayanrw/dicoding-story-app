@@ -1,8 +1,6 @@
 package com.heyproject.storyapp.presentation.home
 
 import androidx.lifecycle.*
-import com.heyproject.storyapp.domain.model.User
-import com.heyproject.storyapp.domain.model.UserPreference
 import com.heyproject.storyapp.data.network.StoryApi
 import com.heyproject.storyapp.data.network.response.ListStoryItem
 import kotlinx.coroutines.flow.first

@@ -22,7 +22,6 @@ import com.heyproject.storyapp.base.REQUIRED_PERMISSIONS
 import com.heyproject.storyapp.data.util.rotateBitmap
 import com.heyproject.storyapp.data.util.uriToFile
 import com.heyproject.storyapp.databinding.ActivityStoryAddBinding
-import com.heyproject.storyapp.domain.model.UserPreference
 import com.heyproject.storyapp.domain.model.dataStore
 import com.heyproject.storyapp.presentation.ViewModelFactory
 import java.io.File

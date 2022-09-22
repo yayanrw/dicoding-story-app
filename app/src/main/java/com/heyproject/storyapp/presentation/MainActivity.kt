@@ -13,7 +13,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.heyproject.storyapp.R
 import com.heyproject.storyapp.databinding.ActivityMainBinding
-import com.heyproject.storyapp.domain.model.UserPreference
 import com.heyproject.storyapp.domain.model.dataStore
 import com.heyproject.storyapp.presentation.home.HomeViewModel
 

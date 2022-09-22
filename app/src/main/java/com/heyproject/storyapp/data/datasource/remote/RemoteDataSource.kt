@@ -6,7 +6,7 @@ import com.heyproject.storyapp.data.datasource.remote.response.LoginResponse
 import com.heyproject.storyapp.data.datasource.remote.response.StoriesResponse
 import com.heyproject.storyapp.domain.model.PostStoryParams
 import com.heyproject.storyapp.domain.model.StoryParams
-import com.heyproject.storyapp.domain.model.UserModel
+import com.heyproject.storyapp.domain.model.User
 
 class RemoteDataSourceImpl(private val storyApi: StoryApi) : RemoteDataSource {
     override suspend fun getStories(storyParams: StoryParams): StoriesResponse =
@@ -17,10 +17,10 @@ class RemoteDataSourceImpl(private val storyApi: StoryApi) : RemoteDataSource {
             storyParams.auth
         )
 
-    override suspend fun postLogin(user: UserModel): LoginResponse =
+    override suspend fun postLogin(user: User): LoginResponse =
         storyApi.postLogin(user.email, user.password)
 
-    override suspend fun postRegister(user: UserModel): GeneralResponse =
+    override suspend fun postRegister(user: User): GeneralResponse =
         storyApi.postRegister(user.name, user.email, user.password)
 
     override suspend fun postStory(postStoryParams: PostStoryParams): GeneralResponse =
@@ -30,7 +30,7 @@ class RemoteDataSourceImpl(private val storyApi: StoryApi) : RemoteDataSource {
 
 interface RemoteDataSource {
     suspend fun getStories(storyParams: StoryParams): StoriesResponse
-    suspend fun postLogin(user: UserModel): LoginResponse
-    suspend fun postRegister(user: UserModel): GeneralResponse
+    suspend fun postLogin(user: User): LoginResponse
+    suspend fun postRegister(user: User): GeneralResponse
     suspend fun postStory(postStoryParams: PostStoryParams): GeneralResponse
 }
