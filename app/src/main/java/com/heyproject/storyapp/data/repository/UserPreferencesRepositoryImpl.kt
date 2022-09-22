@@ -6,6 +6,7 @@ import com.heyproject.storyapp.data.datasource.local.LocalDataSource
 import com.heyproject.storyapp.domain.model.User
 import com.heyproject.storyapp.domain.repository.UserPreferencesRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 
 /**
@@ -17,7 +18,7 @@ class UserPreferencesRepositoryImpl(private val localDataSource: LocalDataSource
     BaseRepositoryImpl(), UserPreferencesRepository {
     override fun getUser(): Flow<DataResource<User>> =
         flow {
-            emit(proceed { localDataSource.getUser() })
+            emit(proceed { localDataSource.getUser().first() })
         }
 
     override suspend fun saveUser(user: User): Flow<DataResource<Boolean>> =
@@ -27,6 +28,6 @@ class UserPreferencesRepositoryImpl(private val localDataSource: LocalDataSource
 
     override suspend fun removeUser(user: User): Flow<DataResource<Boolean>> =
         flow {
-            emit(proceed { localDataSource.removeUser(user) })
+            emit(proceed { localDataSource.removeUser() })
         }
 }
