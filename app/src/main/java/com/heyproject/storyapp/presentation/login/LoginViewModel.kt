@@ -1,8 +1,8 @@
 package com.heyproject.storyapp.presentation.login
 
 import androidx.lifecycle.*
-import com.heyproject.storyapp.domain.User
-import com.heyproject.storyapp.domain.UserPreference
+import com.heyproject.storyapp.domain.model.User
+import com.heyproject.storyapp.domain.model.UserPreference
 import com.heyproject.storyapp.data.network.StoryApi
 import com.heyproject.storyapp.data.network.response.LoginResult
 import kotlinx.coroutines.launch

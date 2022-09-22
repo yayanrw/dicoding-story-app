@@ -4,9 +4,9 @@ import com.heyproject.storyapp.data.datasource.remote.api.StoryApi
 import com.heyproject.storyapp.data.datasource.remote.response.GeneralResponse
 import com.heyproject.storyapp.data.datasource.remote.response.LoginResponse
 import com.heyproject.storyapp.data.datasource.remote.response.StoriesResponse
-import com.heyproject.storyapp.domain.PostStoryParams
-import com.heyproject.storyapp.domain.StoryParams
-import com.heyproject.storyapp.domain.UserModel
+import com.heyproject.storyapp.domain.model.PostStoryParams
+import com.heyproject.storyapp.domain.model.StoryParams
+import com.heyproject.storyapp.domain.model.UserModel
 
 class RemoteDataSourceImpl(private val storyApi: StoryApi) : RemoteDataSource {
     override suspend fun getStories(storyParams: StoryParams): StoriesResponse =

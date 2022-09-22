@@ -2,7 +2,7 @@ package com.heyproject.storyapp.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.heyproject.storyapp.domain.UserPreference
+import com.heyproject.storyapp.domain.model.UserPreference
 import com.heyproject.storyapp.presentation.home.HomeViewModel
 import com.heyproject.storyapp.presentation.login.LoginViewModel
 import com.heyproject.storyapp.presentation.register.RegisterViewModel

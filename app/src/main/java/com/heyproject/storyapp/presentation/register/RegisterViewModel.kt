@@ -1,8 +1,8 @@
 package com.heyproject.storyapp.presentation.register
 
 import androidx.lifecycle.*
-import com.heyproject.storyapp.domain.User
-import com.heyproject.storyapp.domain.UserPreference
+import com.heyproject.storyapp.domain.model.User
+import com.heyproject.storyapp.domain.model.UserPreference
 import com.heyproject.storyapp.data.network.StoryApi
 import kotlinx.coroutines.launch
 import retrofit2.HttpException

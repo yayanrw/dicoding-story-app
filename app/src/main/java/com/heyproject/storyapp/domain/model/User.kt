@@ -1,4 +1,4 @@
-package com.heyproject.storyapp.domain
+package com.heyproject.storyapp.domain.model
 
 data class User(
     var userId: String,

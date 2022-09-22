@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.heyproject.storyapp.domain.UserPreference
+import com.heyproject.storyapp.domain.model.UserPreference
 import com.heyproject.storyapp.data.network.StoryApi
 import com.heyproject.storyapp.data.util.reduceFileImage
 import kotlinx.coroutines.flow.first

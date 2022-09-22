@@ -2,7 +2,7 @@ package com.heyproject.storyapp.data.datasource.local
 
 import com.heyproject.storyapp.data.datasource.local.dao.StoryDao
 import com.heyproject.storyapp.data.datasource.local.entity.StoryEntity
-import com.heyproject.storyapp.domain.StoryParams
+import com.heyproject.storyapp.domain.model.StoryParams
 
 class LocalDataSourceImpl(private val storyDao: StoryDao) : LocalDataSource {
     override suspend fun getStories(storyParams: StoryParams): List<StoryEntity> =

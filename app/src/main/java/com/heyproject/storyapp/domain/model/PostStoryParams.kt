@@ -1,4 +1,4 @@
-package com.heyproject.storyapp.domain
+package com.heyproject.storyapp.domain.model
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

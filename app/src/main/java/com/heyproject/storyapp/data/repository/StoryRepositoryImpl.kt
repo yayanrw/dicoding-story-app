@@ -7,9 +7,9 @@ import com.heyproject.storyapp.data.datasource.remote.RemoteDataSource
 import com.heyproject.storyapp.data.datasource.remote.response.GeneralResponse
 import com.heyproject.storyapp.data.datasource.remote.response.LoginResponse
 import com.heyproject.storyapp.data.datasource.remote.response.StoriesResponse
-import com.heyproject.storyapp.domain.PostStoryParams
-import com.heyproject.storyapp.domain.StoryParams
-import com.heyproject.storyapp.domain.UserModel
+import com.heyproject.storyapp.domain.model.PostStoryParams
+import com.heyproject.storyapp.domain.model.StoryParams
+import com.heyproject.storyapp.domain.model.UserModel
 import com.heyproject.storyapp.domain.repository.StoryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

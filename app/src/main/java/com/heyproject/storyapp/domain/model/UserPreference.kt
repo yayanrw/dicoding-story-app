@@ -1,4 +1,4 @@
-package com.heyproject.storyapp.domain
+package com.heyproject.storyapp.domain.model
 
 import android.content.Context
 import androidx.datastore.core.DataStore
