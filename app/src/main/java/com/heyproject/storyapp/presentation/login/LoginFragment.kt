@@ -16,7 +16,6 @@ import com.heyproject.storyapp.R
 import com.heyproject.storyapp.base.MIN_PASSWORD_LENGTH
 import com.heyproject.storyapp.databinding.FragmentLoginBinding
 import com.heyproject.storyapp.domain.model.dataStore
-import com.heyproject.storyapp.presentation.ViewModelFactory
 
 class LoginFragment : Fragment() {
 

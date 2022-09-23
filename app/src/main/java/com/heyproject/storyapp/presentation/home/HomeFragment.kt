@@ -6,24 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.heyproject.storyapp.R
 import com.heyproject.storyapp.data.adapter.StoryAdapter
+import com.heyproject.storyapp.data.datasource.local.datastore.dataStore
 import com.heyproject.storyapp.databinding.FragmentHomeBinding
-import com.heyproject.storyapp.domain.model.dataStore
-import com.heyproject.storyapp.presentation.ViewModelFactory
 
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     val binding get() = _binding!!
     private lateinit var userPreference: UserPreference
-    private val viewModel: HomeViewModel by viewModels {
-        ViewModelFactory(
-            userPreference
-        )
-    }
+    private val viewModel: HomeViewModel by viewModel
     private lateinit var storyAdapter: StoryAdapter
 
     override fun onCreateView(
