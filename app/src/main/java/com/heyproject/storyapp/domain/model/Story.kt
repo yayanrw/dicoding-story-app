@@ -36,8 +36,8 @@ fun StoryEntity?.toStory() = Story(
     createdAt = this?.createdAt.orEmpty()
 )
 
-fun List<StoryEntity>?.mapToViewParams() = mutableListOf<Story>().apply {
-    addAll(this@mapToViewParams?.map {
+fun List<StoryEntity>?.toStories() = mutableListOf<Story>().apply {
+    addAll(this@toStories?.map {
         it.toStory()
     } ?: listOf())
 }
