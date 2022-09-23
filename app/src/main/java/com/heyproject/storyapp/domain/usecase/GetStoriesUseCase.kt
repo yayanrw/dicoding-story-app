@@ -20,9 +20,9 @@ Github : https://github.com/yayanrw
 class GetStoriesUseCase(
     private val storyRepository: StoryRepository,
     private val dispatcher: CoroutineDispatcher
-) : BaseUseCase<Any, List<Story>?>(dispatcher) {
-    override suspend fun execute(param: Any?): Flow<ViewResource<List<Story>?>> {
-        return storyRepository.getStories(param as StoryParams).map { networkResult ->
+) : BaseUseCase<StoryParams, List<Story>?>(dispatcher) {
+    override suspend fun execute(param: StoryParams?): Flow<ViewResource<List<Story>?>> {
+        return storyRepository.getStories(param!!).map { networkResult ->
             when (networkResult) {
                 is DataResource.Success -> {
                     ViewResource.Success(networkResult.data?.listStory?.map {
