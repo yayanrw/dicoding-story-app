@@ -1,4 +1,4 @@
-package com.heyproject.storyapp.data.ui
+package com.heyproject.storyapp.data.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

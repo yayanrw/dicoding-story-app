@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.heyproject.storyapp.R
-import com.heyproject.storyapp.data.ui.StoryAdapter
+import com.heyproject.storyapp.data.adapter.StoryAdapter
 import com.heyproject.storyapp.databinding.FragmentHomeBinding
 import com.heyproject.storyapp.domain.model.dataStore
 import com.heyproject.storyapp.presentation.ViewModelFactory
