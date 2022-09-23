@@ -19,7 +19,7 @@ Github : https://github.com/yayanrw
 
 class GetStoriesUseCase(
     private val storyRepository: StoryRepository,
-    private val dispatcher: CoroutineDispatcher
+    dispatcher: CoroutineDispatcher
 ) : BaseUseCase<StoryParams, List<Story>?>(dispatcher) {
     override suspend fun execute(param: StoryParams?): Flow<ViewResource<List<Story>?>> {
         return storyRepository.getStories(param!!).map { networkResult ->
