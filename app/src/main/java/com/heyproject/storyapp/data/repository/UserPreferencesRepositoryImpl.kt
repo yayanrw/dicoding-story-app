@@ -16,7 +16,7 @@ Github : https://github.com/yayanrw
 
 class UserPreferencesRepositoryImpl(private val localDataSource: LocalDataSource) :
     BaseRepositoryImpl(), UserPreferencesRepository {
-    override fun getUser(): Flow<DataResource<User>> =
+    override suspend fun getUser(): Flow<DataResource<User>> =
         flow {
             emit(proceed { localDataSource.getUser().first() })
         }
