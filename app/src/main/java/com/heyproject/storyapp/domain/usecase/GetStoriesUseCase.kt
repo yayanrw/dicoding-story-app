@@ -25,9 +25,13 @@ class GetStoriesUseCase(
         return storyRepository.getStories(param!!).map { networkResult ->
             when (networkResult) {
                 is DataResource.Success -> {
-                    ViewResource.Success(networkResult.data?.listStory?.map {
-                        it.toStory()
-                    })
+                    if (networkResult.data?.listStory.isNullOrEmpty()) {
+                        ViewResource.Empty()
+                    } else {
+                        ViewResource.Success(networkResult.data?.listStory?.map {
+                            it.toStory()
+                        })
+                    }
                 }
                 is DataResource.Error -> {
                     ViewResource.Error(networkResult.exception)
