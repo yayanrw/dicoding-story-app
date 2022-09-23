@@ -11,7 +11,7 @@ Github : https://github.com/yayanrw
  **/
 
 interface UserPreferencesRepository : BaseContract.BaseRepository {
-    fun getUser(): Flow<DataResource<User>>
+    suspend fun getUser(): Flow<DataResource<User>>
     suspend fun saveUser(user: User): Flow<DataResource<Boolean>>
     suspend fun removeUser(user: User): Flow<DataResource<Boolean>>
 }
