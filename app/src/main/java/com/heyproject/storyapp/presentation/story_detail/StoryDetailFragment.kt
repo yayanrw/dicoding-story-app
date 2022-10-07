@@ -8,12 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.heyproject.storyapp.databinding.FragmentStoryDetailBinding
-import com.heyproject.storyapp.domain.model.dataStore
 
 class StoryDetailFragment : Fragment() {
     private var _binding: FragmentStoryDetailBinding? = null
     val binding get() = _binding!!
-    private lateinit var userPreference: UserPreference
+
+    //    private lateinit var userPreference: UserPreference
     private val args: StoryDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -27,10 +27,10 @@ class StoryDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         removeActionBar()
-        userPreference = UserPreference(requireContext().dataStore)
+//        userPreference = UserPreference(requireContext().dataStore)
 
         binding.apply {
-            story = args.storyItem
+//            story = args.storyItem
             executePendingBindings()
         }
     }

@@ -65,9 +65,7 @@
         android:label="fragment_story_detail"
         tools:layout="@layout/fragment_story_detail" >
         <argument
-            android:name="storyItem"
-            app:argType="com.heyproject.storyapp.data.network.response.ListStoryItem"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            android:name="story"
+            app:argType="com.heyproject.storyapp.domain.model.Story" />
     </fragment>
 </navigation>

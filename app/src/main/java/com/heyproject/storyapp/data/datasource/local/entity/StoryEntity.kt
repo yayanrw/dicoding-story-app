@@ -6,7 +6,7 @@ import com.heyproject.storyapp.domain.model.Story
 
 @Entity(tableName = "stories")
 data class StoryEntity(
-    @PrimaryKey val id: String?,
+    @PrimaryKey val id: String,
     val name: String?,
     val description: String?,
     val photoUrl: String?,

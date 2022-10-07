@@ -26,7 +26,7 @@ import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -40,7 +40,6 @@ Github : https://github.com/yayanrw
 object InjectionModules {
     private const val BASE_URL = "https://story-api.dicoding.dev/v1/"
     private const val TIMEOUT_CONNECTION: Long = 120
-    private const val DB_NAME = "StoryDB.db"
 
     fun getModules() = listOf(
         networkModule,
@@ -72,12 +71,8 @@ object InjectionModules {
     }
 
     private val dataBaseModule = module {
-        factory { get<StoryDatabase>().storyDao() }
-        single {
-            Room.databaseBuilder(
-                androidContext(), StoryDatabase::class.java, DB_NAME
-            ).fallbackToDestructiveMigration().build()
-        }
+        single { get<StoryDatabase>().storyDao() }
+        single { StoryDatabase.create(androidContext())}
     }
 
     private val dataSourceModule = module {
@@ -98,9 +93,9 @@ object InjectionModules {
     }
 
     private val viewModelModule = module {
-        viewModel { HomeViewModel(get()) }
-        viewModel { LoginViewModel(get()) }
-        viewModel { RegisterViewModel(get()) }
-        viewModel { StoryAddViewModel(get()) }
+        viewModelOf(::HomeViewModel)
+        viewModelOf(::LoginViewModel)
+        viewModelOf(::RegisterViewModel)
+        viewModelOf(::StoryAddViewModel)
     }
 }

@@ -1,5 +1,6 @@
-package com.heyproject.storyapp.presentation.story_add
+package com.heyproject.storyapp.ui.story_add
 
+import android.Manifest
 import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
@@ -9,25 +10,27 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
-import com.heyproject.storyapp.base.CAMERA_RESULT
-import com.heyproject.storyapp.base.IS_BACK_CAMERA_RESULT
-import com.heyproject.storyapp.base.REQUEST_CODE_PERMISSIONS
-import com.heyproject.storyapp.base.REQUIRED_PERMISSIONS
-import com.heyproject.storyapp.data.util.rotateBitmap
-import com.heyproject.storyapp.data.util.uriToFile
 import com.heyproject.storyapp.databinding.ActivityStoryAddBinding
+import com.heyproject.storyapp.model.UserPreference
+import com.heyproject.storyapp.model.dataStore
+import com.heyproject.storyapp.ui.ViewModelFactory
+import com.heyproject.storyapp.util.RequestState
+import com.heyproject.storyapp.util.rotateBitmap
+import com.heyproject.storyapp.util.uriToFile
 import java.io.File
 
 class StoryAddActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoryAddBinding
-//    private lateinit var userPreference: UserPreference
-//    private val viewModel: StoryAddViewModel by viewModels {
-//        ViewModelFactory(userPreference)
-//    }
+    private lateinit var userPreference: UserPreference
+    private val viewModel: StoryAddViewModel by viewModels {
+        ViewModelFactory(userPreference)
+    }
     private var getFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +38,7 @@ class StoryAddActivity : AppCompatActivity() {
         binding = ActivityStoryAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        userPreference = UserPreference(dataStore)
+        userPreference = UserPreference(dataStore)
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -49,35 +52,40 @@ class StoryAddActivity : AppCompatActivity() {
             storyAddActivity = this@StoryAddActivity
         }
 
-//        viewModel.requestState.observe(this) {
-//            when (it) {
-//                RequestState.LOADING -> {
-//                    setLoading(true)
-//                }
-//                RequestState.ERROR -> {
-//                    setLoading(false)
-//                    Snackbar.make(binding.root, getString(R.string.oops), Snackbar.LENGTH_SHORT)
-//                        .show()
-//                }
-//                RequestState.NO_CONNECTION -> {
-//                    setLoading(false)
-//                    Snackbar.make(
-//                        binding.root,
-//                        getString(R.string.no_connection),
-//                        Snackbar.LENGTH_SHORT
-//                    ).show()
-//                }
-//                else -> {
-//                    setLoading(false)
-//                    Snackbar.make(
-//                        binding.root,
-//                        getString(R.string.upload_success),
-//                        Snackbar.LENGTH_SHORT
-//                    ).show()
-//                    finish()
-//                }
-//            }
-//        }
+        viewModel.getUser().observe(this) {
+            if (!it.isLogin) {
+                finish()
+            }
+        }
+
+        viewModel.requestState.observe(this) {
+            when (it) {
+                RequestState.LOADING -> {
+                    setLoading(true)
+                }
+                RequestState.ERROR -> {
+                    setLoading(false)
+                    Snackbar.make(binding.root, getString(R.string.oops), Snackbar.LENGTH_SHORT).show()
+                }
+                RequestState.NO_CONNECTION -> {
+                    setLoading(false)
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.no_connection),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                    setLoading(false)
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.upload_success),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    finish()
+                }
+            }
+        }
     }
 
     private fun setLoading(isLoading: Boolean) {
@@ -125,8 +133,8 @@ class StoryAddActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) {
         if (it.resultCode == CAMERA_X_RESULT) {
-            val myFile = it.data?.getSerializableExtra(CAMERA_RESULT) as File
-            val isBackCamera = it.data?.getBooleanExtra(IS_BACK_CAMERA_RESULT, true) as Boolean
+            val myFile = it.data?.getSerializableExtra("picture") as File
+            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
             getFile = myFile
             val result = rotateBitmap(
                 BitmapFactory.decodeFile(getFile?.path),
@@ -157,9 +165,9 @@ class StoryAddActivity : AppCompatActivity() {
     }
 
     fun uploadImage() {
-//        if (formValidation()) {
-//            viewModel.uploadImage(getFile!!, binding.edAddDescription.text.toString())
-//        }
+        if (formValidation()) {
+            viewModel.uploadImage(getFile!!, binding.edAddDescription.text.toString())
+        }
     }
 
     private fun formValidation(): Boolean {
@@ -184,5 +192,7 @@ class StoryAddActivity : AppCompatActivity() {
 
     companion object {
         const val CAMERA_X_RESULT = 200
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private const val REQUEST_CODE_PERMISSIONS = 10
     }
 }

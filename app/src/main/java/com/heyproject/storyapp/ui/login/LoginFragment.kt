@@ -1,4 +1,4 @@
-package com.heyproject.storyapp.presentation.login
+package com.heyproject.storyapp.ui.login
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
@@ -9,18 +9,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.heyproject.storyapp.R
-import com.heyproject.storyapp.base.MIN_PASSWORD_LENGTH
+import com.heyproject.storyapp.core.MIN_PASSWORD_LENGTH
 import com.heyproject.storyapp.databinding.FragmentLoginBinding
-import com.heyproject.storyapp.domain.model.User
-import org.koin.androidx.viewmodel.ext.android.viewModel
-
+import com.heyproject.storyapp.model.UserPreference
+import com.heyproject.storyapp.model.dataStore
+import com.heyproject.storyapp.ui.ViewModelFactory
+import com.heyproject.storyapp.util.RequestState
 
 class LoginFragment : Fragment() {
 
     private var binding: FragmentLoginBinding? = null
-    private val viewModel: LoginViewModel by viewModel()
+    private lateinit var userPreference: UserPreference
+    private val viewModel: LoginViewModel by viewModels {
+        ViewModelFactory(userPreference)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +40,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         removeActionBar()
+        userPreference = UserPreference(requireContext().dataStore)
 
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -41,39 +48,39 @@ class LoginFragment : Fragment() {
             loginFragment = this@LoginFragment
         }
 
-//        viewModel.getUser().observe(viewLifecycleOwner) {
-//            if (it.isLogin) {
-//                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-//            }
-//        }
-//
-//        viewModel.requestState.observe(viewLifecycleOwner) {
-//            when (it) {
-//                RequestState.LOADING -> {
-//                    setLoading(true)
-//                }
-//                RequestState.ERROR -> {
-//                    setLoading(false)
-//                    Snackbar.make(view, getString(R.string.oops), Snackbar.LENGTH_SHORT).show()
-//                }
-//                RequestState.INVALID_CREDENTIALS -> {
-//                    setLoading(false)
-//                    Snackbar.make(
-//                        view,
-//                        getString(R.string.invalid_credentials),
-//                        Snackbar.LENGTH_SHORT
-//                    ).show()
-//                }
-//                RequestState.NO_CONNECTION -> {
-//                    setLoading(false)
-//                    Snackbar.make(view, getString(R.string.no_connection), Snackbar.LENGTH_SHORT)
-//                        .show()
-//                }
-//                else -> {
-//                    setLoading(false)
-//                }
-//            }
-//        }
+        viewModel.getUser().observe(viewLifecycleOwner) {
+            if (it.isLogin) {
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+            }
+        }
+
+        viewModel.requestState.observe(viewLifecycleOwner) {
+            when (it) {
+                RequestState.LOADING -> {
+                    setLoading(true)
+                }
+                RequestState.ERROR -> {
+                    setLoading(false)
+                    Snackbar.make(view, getString(R.string.oops), Snackbar.LENGTH_SHORT).show()
+                }
+                RequestState.INVALID_CREDENTIALS -> {
+                    setLoading(false)
+                    Snackbar.make(
+                        view,
+                        getString(R.string.invalid_credentials),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                RequestState.NO_CONNECTION -> {
+                    setLoading(false)
+                    Snackbar.make(view, getString(R.string.no_connection), Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+                else -> {
+                    setLoading(false)
+                }
+            }
+        }
 
         playAnimation()
     }
@@ -104,10 +111,8 @@ class LoginFragment : Fragment() {
     fun signIn() {
         if (formValidation()) {
             viewModel.signIn(
-                User(
-                    email = binding!!.edLoginEmail.text.toString(),
-                    password = binding!!.edLoginPassword.text.toString()
-                )
+                binding!!.edLoginEmail.text.toString(),
+                binding!!.edLoginPassword.text.toString()
             )
         }
     }

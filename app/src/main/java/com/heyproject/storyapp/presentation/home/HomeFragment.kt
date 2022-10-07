@@ -9,15 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.heyproject.storyapp.R
 import com.heyproject.storyapp.data.adapter.StoryAdapter
-import com.heyproject.storyapp.data.datasource.local.datastore.dataStore
 import com.heyproject.storyapp.databinding.FragmentHomeBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     val binding get() = _binding!!
-    private lateinit var userPreference: UserPreference
-    private val viewModel: HomeViewModel by viewModel
+//    private lateinit var userPreference: UserPreference
+    private val viewModel: HomeViewModel by viewModel()
     private lateinit var storyAdapter: StoryAdapter
 
     override fun onCreateView(
@@ -31,14 +31,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showActionBar()
-        userPreference = UserPreference(requireContext().dataStore)
+//        userPreference = UserPreference(requireContext().dataStore)
 
         storyAdapter = StoryAdapter()
-        storyAdapter.onItemClick = { selectedStory ->
-            val toStoryDetailFragment =
-                HomeFragmentDirections.actionHomeFragmentToStoryDetailFragment(selectedStory)
-            findNavController().navigate(toStoryDetailFragment)
-        }
+//        storyAdapter.onItemClick = { selectedStory ->
+//            val toStoryDetailFragment =
+//                HomeFragmentDirections.actionHomeFragmentToStoryDetailFragment(selectedStory)
+//            findNavController().navigate(toStoryDetailFragment)
+//        }
 
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -50,51 +50,53 @@ class HomeFragment : Fragment() {
                 adapter = storyAdapter
             }
         }
+        findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+
 
         fetchStories()
 
-        viewModel.getUser().observe(viewLifecycleOwner) {
-            if (!it.isLogin) {
-                findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
-            }
-        }
+//        viewModel.getUser().observe(viewLifecycleOwner) {
+//            if (!it.isLogin) {
+//                findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+//            }
+//        }
+//
+//        viewModel.stories.observe(viewLifecycleOwner) {
+//            storyAdapter.submitList(it)
+//        }
 
-        viewModel.stories.observe(viewLifecycleOwner) {
-            storyAdapter.submitList(it)
-        }
-
-        viewModel.requestState.observe(viewLifecycleOwner) {
-            when (it) {
-                RequestState.LOADING -> {
-                    binding.circularProgressIndicator.visibility = View.VISIBLE
-                    binding.rvStory.visibility = View.GONE
-                    binding.screenError.root.visibility = View.GONE
-                }
-                RequestState.NO_DATA -> {
-                    binding.circularProgressIndicator.visibility = View.GONE
-                    binding.rvStory.visibility = View.GONE
-                    binding.screenError.root.visibility = View.VISIBLE
-                    binding.screenError.tvError.text = getString(R.string.no_data_available)
-                }
-                RequestState.ERROR -> {
-                    binding.circularProgressIndicator.visibility = View.GONE
-                    binding.rvStory.visibility = View.GONE
-                    binding.screenError.root.visibility = View.VISIBLE
-                    binding.screenError.tvError.text = getString(R.string.oops)
-                }
-                RequestState.NO_CONNECTION -> {
-                    binding.circularProgressIndicator.visibility = View.GONE
-                    binding.rvStory.visibility = View.GONE
-                    binding.screenError.root.visibility = View.VISIBLE
-                    binding.screenError.tvError.text = getString(R.string.no_connection)
-                }
-                else -> {
-                    binding.circularProgressIndicator.visibility = View.GONE
-                    binding.rvStory.visibility = View.VISIBLE
-                    binding.screenError.root.visibility = View.GONE
-                }
-            }
-        }
+//        viewModel.requestState.observe(viewLifecycleOwner) {
+//            when (it) {
+//                RequestState.LOADING -> {
+//                    binding.circularProgressIndicator.visibility = View.VISIBLE
+//                    binding.rvStory.visibility = View.GONE
+//                    binding.screenError.root.visibility = View.GONE
+//                }
+//                RequestState.NO_DATA -> {
+//                    binding.circularProgressIndicator.visibility = View.GONE
+//                    binding.rvStory.visibility = View.GONE
+//                    binding.screenError.root.visibility = View.VISIBLE
+//                    binding.screenError.tvError.text = getString(R.string.no_data_available)
+//                }
+//                RequestState.ERROR -> {
+//                    binding.circularProgressIndicator.visibility = View.GONE
+//                    binding.rvStory.visibility = View.GONE
+//                    binding.screenError.root.visibility = View.VISIBLE
+//                    binding.screenError.tvError.text = getString(R.string.oops)
+//                }
+//                RequestState.NO_CONNECTION -> {
+//                    binding.circularProgressIndicator.visibility = View.GONE
+//                    binding.rvStory.visibility = View.GONE
+//                    binding.screenError.root.visibility = View.VISIBLE
+//                    binding.screenError.tvError.text = getString(R.string.no_connection)
+//                }
+//                else -> {
+//                    binding.circularProgressIndicator.visibility = View.GONE
+//                    binding.rvStory.visibility = View.VISIBLE
+//                    binding.screenError.root.visibility = View.GONE
+//                }
+//            }
+//        }
     }
 
     override fun onResume() {

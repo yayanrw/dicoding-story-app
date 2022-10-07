@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.heyproject.storyapp.data.network.response.ListStoryItem
 import com.heyproject.storyapp.databinding.ItemStoryBinding
+import com.heyproject.storyapp.domain.model.Story
 
 class StoryAdapter :
-    ListAdapter<ListStoryItem, StoryAdapter.StoryViewHolder>(DiffCallback) {
-    var onItemClick: ((ListStoryItem) -> Unit)? = null
+    ListAdapter<Story, StoryAdapter.StoryViewHolder>(DiffCallback) {
+    var onItemClick: ((Story) -> Unit)? = null
 
     inner class StoryViewHolder(var binding: ItemStoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(listStoryItem: ListStoryItem?) {
+        fun bind(listStoryItem: Story?) {
             binding.apply {
                 tvItemName.text = listStoryItem?.name
                 story = listStoryItem
@@ -39,12 +39,12 @@ class StoryAdapter :
         holder.bind(story)
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<ListStoryItem>() {
-        override fun areItemsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<Story>() {
+        override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
+        override fun areContentsTheSame(oldItem: Story, newItem: Story): Boolean {
             return oldItem.id == newItem.id
         }
 
